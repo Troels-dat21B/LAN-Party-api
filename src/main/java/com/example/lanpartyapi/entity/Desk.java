@@ -10,23 +10,23 @@ import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 
-
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter
 @Setter
 @Entity
-public class TablePlan {
-
+public class Desk {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    int tableplan_id;
+    int table_id;
 
-    @OneToMany
-    public List<Segment> segments = new ArrayList<>();
+    @OneToMany(mappedBy = "desk", fetch = FetchType.LAZY)
+    List<Chair> chairs = new ArrayList<>();
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "segment_id")
+    private Segment segment;
 
-    private String name;
 
 }

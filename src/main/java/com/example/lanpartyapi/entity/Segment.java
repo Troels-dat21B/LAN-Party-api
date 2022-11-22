@@ -5,11 +5,10 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.OneToMany;
+import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
-@OneToMany
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter
@@ -18,7 +17,13 @@ import javax.persistence.OneToMany;
 public class Segment {
 
     @Id
-    int id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    int segment_id;
 
+    @OneToMany
+    List<Desk> desks = new ArrayList<>();
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "tableplan_id")
+    private TablePlan tablePlan;
 }

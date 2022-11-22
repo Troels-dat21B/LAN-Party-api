@@ -1,8 +1,8 @@
 package com.example.lanpartyapi.repository;
 
-import com.example.lanpartyapi.entity.Table;
+import com.example.lanpartyapi.entity.Desk;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 
-public interface TableRepo extends JpaRepository<Table, Integer> {
+public interface TableRepo extends JpaRepository<Desk, Integer> {
 }
