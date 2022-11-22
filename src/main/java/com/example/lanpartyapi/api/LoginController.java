@@ -27,10 +27,4 @@ public class LoginController {
 
         return new ResponseEntity<>("Succesfully received cookie", HttpStatus.OK);
     }
-    
-    @GetMapping("/test")
-    public ResponseEntity<String> test() {
-        return new ResponseEntity<>("test", HttpStatus.OK);
-    }
-
 }
