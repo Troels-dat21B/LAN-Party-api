@@ -24,7 +24,6 @@ public class TablePlan {
     @OneToMany
     public List<Segment> segments = new ArrayList<>();
 
-
     private String name;
 
 
