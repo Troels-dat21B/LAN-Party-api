@@ -14,16 +14,11 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @CrossOrigin
 @RequestMapping("/api/login")
-public class LoginController {
+public class  LoginController {
     
     @GetMapping()
     public ResponseEntity<String> cookieTest (HttpServletResponse httpServletResponse){
-        Cookie cookie = new Cookie("testCookie", "test");
-        cookie.setHttpOnly(true);
-        cookie.setMaxAge(60*60);
-        cookie.setPath("/");
-
-        httpServletResponse.addCookie(cookie);
+        
 
         return new ResponseEntity<>("Succesfully received cookie", HttpStatus.OK);
     }
