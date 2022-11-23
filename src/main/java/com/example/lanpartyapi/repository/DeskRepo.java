@@ -4,5 +4,5 @@ import com.example.lanpartyapi.entity.Desk;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 
-public interface TableRepo extends JpaRepository<Desk, Integer> {
+public interface DeskRepo extends JpaRepository<Desk, Integer> {
 }
