@@ -1,10 +1,7 @@
 package com.example.lanpartyapi.entity;
 
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import javax.persistence.*;
 import java.util.ArrayList;
@@ -16,6 +13,7 @@ import java.util.List;
 @Getter
 @Setter
 @Entity
+@ToString
 public class TablePlan {
 
 
@@ -28,5 +26,6 @@ public class TablePlan {
 
 
     private String name;
+
 
 }

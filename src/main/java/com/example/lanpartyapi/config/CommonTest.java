@@ -35,11 +35,7 @@ public class CommonTest implements ApplicationRunner {
     @Override
     public void run(ApplicationArguments args) throws Exception {
 
-        TablePlan myTablePlan1 = new TablePlan();
 
-        tablePlanRepo.save(myTablePlan1);
-
-        System.out.println(tableRepo.findById(0));
 
 
     }
