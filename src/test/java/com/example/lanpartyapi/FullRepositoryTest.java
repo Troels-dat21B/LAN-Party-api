@@ -1,6 +1,7 @@
 package com.example.lanpartyapi;
 
-
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 import com.example.lanpartyapi.entity.Chair;
 import com.example.lanpartyapi.entity.Desk;
 import com.example.lanpartyapi.entity.Segment;
@@ -33,12 +34,18 @@ public class FullRepositoryTest {
     void setupBeforeTests() {
         TablePlan tablePlan = new TablePlan();
         tablePlan.setName("Test tableplan");
-        this.tablePlanRepo.save(tablePlan);
+
 
         Segment segment = new Segment();
         Segment segment2 = new Segment();
+        tablePlan.addSegment(segment);
+        segment.setTablePlan(tablePlan);
+        segment2.setTablePlan(tablePlan);
         this.segmentRepo.save(segment);
         this.segmentRepo.save(segment2);
+
+        this.tablePlanRepo.save(tablePlan);
+
 
         Desk desk = new Desk();
         Desk desk2 = new Desk();
@@ -70,7 +77,13 @@ public class FullRepositoryTest {
 
     @Test
     void testConnectionBetweenEntities(){
-        
+        List<Segment> segmentList = this.segmentRepo.findAll();
+        List<TablePlan> tableList = this.tablePlanRepo.findAll();
+        System.out.println("sout1 : " + segmentList.get(0).getTablePlan());
+        System.out.println("sout2 : " + tableList.get(0).getSegments());
+        //assertEquals(segmentList.get(0).getTablePlan().getTableplan_id(), tableList.get(0).getTableplan_id());
+
+
     }
 
 

@@ -6,7 +6,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
-
+import javax.persistence.*;
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter
@@ -19,7 +19,7 @@ public class Chair {
     int chair_id;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "table_id")
+    @JoinColumn(name = "desk_id")
     private Desk desk;
 
     private boolean is_reserved = false;

@@ -1,6 +1,5 @@
 package com.example.lanpartyapi;
 
-import static org.junit.jupiter.api.Assertions.*;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import com.example.lanpartyapi.entity.Desk;
 import com.example.lanpartyapi.repository.DeskRepo;
@@ -27,8 +26,8 @@ public class DeskRepoTest {
     @Test
     void findDesks(){
         List<Desk> desks = this.tR.findAll();
-        assertEquals(1, desks.get(0).getTable_id());
-        assertEquals(2, desks.get(1).getTable_id());
+        assertEquals(1, desks.get(0).getDesk_id());
+        assertEquals(2, desks.get(1).getDesk_id());
         assertEquals(2, desks.size());
     }
 

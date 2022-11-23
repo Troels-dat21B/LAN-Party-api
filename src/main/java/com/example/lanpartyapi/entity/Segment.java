@@ -1,9 +1,8 @@
 package com.example.lanpartyapi.entity;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import javax.persistence.CascadeType;
+
+import lombok.*;
 
 import javax.persistence.*;
 import java.util.ArrayList;
@@ -20,12 +19,13 @@ public class Segment {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     int segment_id;
 
-    @OneToMany
+    @OneToMany(mappedBy = "segment", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     List<Desk> desks = new ArrayList<>();
 
-    @ManyToOne(fetch = FetchType.LAZY)
+
     @JoinColumn(name = "tableplan_id")
-    private TablePlan tablePlan;
+    @ManyToOne(fetch = FetchType.LAZY)
+    TablePlan tablePlan;
 
 
 

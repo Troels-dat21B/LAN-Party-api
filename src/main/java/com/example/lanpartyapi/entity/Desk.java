@@ -9,6 +9,7 @@ import lombok.Setter;
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
+import javax.persistence.CascadeType;
 
 @AllArgsConstructor
 @NoArgsConstructor
@@ -19,9 +20,9 @@ public class Desk {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    int table_id;
+    int desk_id;
 
-    @OneToMany(mappedBy = "desk", fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "desk", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     List<Chair> chairs = new ArrayList<>();
 
     @ManyToOne(fetch = FetchType.LAZY)

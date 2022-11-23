@@ -6,8 +6,8 @@ import lombok.*;
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
-
-
+import javax.persistence.CascadeType;
+import javax.persistence.*;
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter
@@ -21,10 +21,16 @@ public class TablePlan {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     int tableplan_id;
 
-    @OneToMany
+    @OneToMany(mappedBy = "tablePlan", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     public List<Segment> segments = new ArrayList<>();
 
     private String name;
+
+    public void addSegment(Segment segment){
+        this.segments.add(segment);
+
+    }
+
 
 
 }
