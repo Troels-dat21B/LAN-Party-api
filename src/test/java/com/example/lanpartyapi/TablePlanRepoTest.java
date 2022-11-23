@@ -1,11 +1,11 @@
 package com.example.lanpartyapi;
 import com.example.lanpartyapi.entity.TablePlan;
-import org.junit.jupiter.api.Test;
+import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 
-@Test
-public class TablePlanTest {
+@DataJpaTest
+public class TablePlanRepoTest {
 
-    TablePlan myTablePlan1 = new TablePlan();
+/*    TablePlan myTablePlan1 = new TablePlan();
         myTablePlan1.setName("Bordplan1");
         myTablePlan1.setTableplan_id(1);
         tablePlanRepo.save(myTablePlan1);
@@ -15,6 +15,12 @@ public class TablePlanTest {
 
     toArray().
 
-    toString());
+    toString());*/
+
+
+
+
+
+
 
 }
