@@ -26,4 +26,7 @@ public class Segment {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "tableplan_id")
     private TablePlan tablePlan;
+
+
+
 }
