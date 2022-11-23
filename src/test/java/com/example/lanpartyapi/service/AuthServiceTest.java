@@ -9,60 +9,53 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
+import org.springframework.security.crypto.bcrypt.BCrypt;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 @DataJpaTest
-class LanUserServiceTest {
+class AuthServiceTest {
 
     private LanUserService userService;
+    private AuthService authService;
     private static LanUserRepository userRepositoryStatic;
 
     private static String user1Username;
     private static String user2Username;
+    private static String passwordPreHash;
+    private static String passwordPostHash;
 
     @BeforeAll
     public static void setup(@Autowired LanUserRepository userRepository) {
         userRepositoryStatic = userRepository;
-        //userRepositoryStatic.deleteAll();
+        userRepositoryStatic.deleteAll();
+
+        var salt = BCrypt.gensalt(12);
+
+        passwordPreHash = "testing";
+        passwordPostHash = BCrypt.hashpw(passwordPreHash, salt);
 
         LanUser user1 = new LanUser();
         user1.setUserType(LanUserType.USER);
         user1.setLanUserName("test_1");
-        user1.setUserPassword("test");
+        user1.setUserPassword(passwordPostHash);
         user1Username = user1.getLanUserName();
 
-        LanUser user2 = new LanUser();
-        user2.setUserType(LanUserType.ADMIN);
-        user2.setLanUserName("test_2");
-        user2.setUserPassword("test");
-        user2Username = user2.getLanUserName();
-
         userRepositoryStatic.save(user1);
-        userRepositoryStatic.save(user2);
     }
 
     @BeforeEach
     public void createService() {
         this.userService = new LanUserService(userRepositoryStatic);
+        this.authService = new AuthService(userRepositoryStatic);
     }
 
     @Test
-    void create() {
-        var username = "test 3";
+    public void signIn() {
+        var lanUserRequest = new LanUserRequest();
+        lanUserRequest.setUsername(user1Username);
+        lanUserRequest.setPassword(passwordPreHash);
 
-        var lanUser = new LanUserRequest();
-        lanUser.setUsername(username);
-        lanUser.setPassword("test");
-
-        this.userService.create(lanUser);
-
-        var lanUserFound = this.userService.findByUsername(username);
-        assertEquals(lanUserFound.getUsername(), lanUser.getUsername());
-    }
-
-    @Test
-    void findById() {
-        assertDoesNotThrow(() -> this.userService.findByUsername(user1Username));
+        assertDoesNotThrow(() -> this.authService.signIn(lanUserRequest));
     }
 }

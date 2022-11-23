@@ -25,7 +25,7 @@ public class LanUserService {
 
         LanUser lanUser = new LanUser();
         lanUser.setUserType(LanUserType.USER);
-        lanUser.setUserUsername(userRequest.getUsername());
+        lanUser.setLanUserName(userRequest.getUsername());
         lanUser.setUserPassword(passwordHash);
 
         this.userRepository.save(lanUser);
@@ -36,7 +36,7 @@ public class LanUserService {
         LanUserResponse lanUserResponse;
         if (lanUserOptional.isPresent()) {
             var lanUser = lanUserOptional.get();
-            lanUserResponse = new LanUserResponse(lanUser.getUserUsername());
+            lanUserResponse = new LanUserResponse(lanUser.getLanUserName());
         } else {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND);
         }

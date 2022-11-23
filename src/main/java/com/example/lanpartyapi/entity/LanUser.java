@@ -12,7 +12,7 @@ public class LanUser {
 
     @Id
     @Column(unique = true, nullable = false, length = 45)
-    private String userUsername;
+    private String lanUserName;
 
     @Column(nullable = false, length = 80)
     private String userPassword;
