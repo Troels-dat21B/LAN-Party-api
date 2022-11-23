@@ -6,10 +6,7 @@ import javax.servlet.http.Cookie;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @CrossOrigin
@@ -23,4 +20,8 @@ public class  LoginController {
         return new ResponseEntity<>("Succesfully received cookie", HttpStatus.OK);
     }
 
+    @GetMapping("/test")
+    public ResponseEntity<String> cookieReceivedTest (@CookieValue("testCookie") String test){
+        return new ResponseEntity<>(test, HttpStatus.OK);
+    }
 }
