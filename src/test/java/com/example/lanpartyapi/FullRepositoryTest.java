@@ -2,6 +2,7 @@ package com.example.lanpartyapi;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
+
 import com.example.lanpartyapi.entity.Chair;
 import com.example.lanpartyapi.entity.Desk;
 import com.example.lanpartyapi.entity.Segment;
@@ -35,26 +36,19 @@ public class FullRepositoryTest {
         TablePlan tablePlan = new TablePlan();
         tablePlan.setName("Test tableplan");
 
-
         Segment segment = new Segment();
         Segment segment2 = new Segment();
-        tablePlan.addSegment(segment);
+
         segment.setTablePlan(tablePlan);
         segment2.setTablePlan(tablePlan);
-        this.segmentRepo.save(segment);
-        this.segmentRepo.save(segment2);
 
-        this.tablePlanRepo.save(tablePlan);
-
+        tablePlan.addSegment(segment);
+        tablePlan.addSegment(segment2);
 
         Desk desk = new Desk();
         Desk desk2 = new Desk();
         Desk desk3 = new Desk();
         Desk desk4 = new Desk();
-        this.deskRepo.save(desk);
-        this.deskRepo.save(desk2);
-        this.deskRepo.save(desk3);
-        this.deskRepo.save(desk4);
 
         Chair chair = new Chair();
         Chair chair2 = new Chair();
@@ -64,6 +58,44 @@ public class FullRepositoryTest {
         Chair chair6 = new Chair();
         Chair chair7 = new Chair();
         Chair chair8 = new Chair();
+
+        desk.addChair(chair);
+        desk.addChair(chair2);
+        desk2.addChair(chair3);
+        desk2.addChair(chair4);
+        desk3.addChair(chair5);
+        desk3.addChair(chair6);
+        desk4.addChair(chair7);
+        desk4.addChair(chair8);
+
+        chair.addDesk(desk);
+        chair2.addDesk(desk);
+        chair3.addDesk(desk2);
+        chair4.addDesk(desk2);
+        chair5.addDesk(desk3);
+        chair6.addDesk(desk3);
+        chair7.addDesk(desk4);
+        chair8.addDesk(desk4);
+
+        segment.addDesk(desk);
+        segment.addDesk(desk2);
+        segment2.addDesk(desk3);
+        segment2.addDesk(desk4);
+
+        desk.setSegment(segment);
+        desk2.setSegment(segment);
+        desk3.setSegment(segment2);
+        desk4.setSegment(segment2);
+
+        this.segmentRepo.save(segment);
+        this.segmentRepo.save(segment2);
+        this.tablePlanRepo.save(tablePlan);
+
+        this.deskRepo.save(desk);
+        this.deskRepo.save(desk2);
+        this.deskRepo.save(desk3);
+        this.deskRepo.save(desk4);
+
         this.chairRepo.save(chair);
         this.chairRepo.save(chair2);
         this.chairRepo.save(chair3);
@@ -72,19 +104,30 @@ public class FullRepositoryTest {
         this.chairRepo.save(chair6);
         this.chairRepo.save(chair7);
         this.chairRepo.save(chair8);
-
     }
 
     @Test
-    void testConnectionBetweenEntities(){
-        List<Segment> segmentList = this.segmentRepo.findAll();
+    void testConnectionBetweenSegmentAndTablePlan() {
         List<TablePlan> tableList = this.tablePlanRepo.findAll();
-        System.out.println("sout1 : " + segmentList.get(0).getTablePlan());
-        System.out.println("sout2 : " + tableList.get(0).getSegments());
-        //assertEquals(segmentList.get(0).getTablePlan().getTableplan_id(), tableList.get(0).getTableplan_id());
+        List<Segment> segmentList = this.segmentRepo.findAll();
 
-
+        assertEquals(segmentList.get(0).getTablePlan().getTableplan_id(), tableList.get(0).getTableplan_id());
     }
 
+    @Test
+    void testConnectionBetweenDeskAndSegment() {
+        List<Segment> segmentList = this.segmentRepo.findAll();
+        List<Desk> deskList = this.deskRepo.findAll();
+
+        assertEquals(deskList.get(0).getSegment().getSegment_id(), segmentList.get(0).getSegment_id());
+    }
+
+    @Test
+    void testConnectionBetweenChairAndDesk() {
+        List<Desk> deskList = this.deskRepo.findAll();
+        List<Chair> chairList = this.chairRepo.findAll();
+
+        assertEquals(chairList.get(0).getDesk().getDesk_id(), deskList.get(0).getDesk_id());
+    }
 
 }

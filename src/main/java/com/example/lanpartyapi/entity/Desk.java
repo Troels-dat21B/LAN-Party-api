@@ -29,5 +29,12 @@ public class Desk {
     @JoinColumn(name = "segment_id")
     private Segment segment;
 
+    public void addChair(Chair chair){
+        this.chairs.add(chair);
+    }
+
+
+
+
 
 }

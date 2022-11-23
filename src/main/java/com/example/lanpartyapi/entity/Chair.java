@@ -24,5 +24,9 @@ public class Chair {
 
     private boolean is_reserved = false;
 
+    public void addDesk(Desk desk){
+        this.desk = desk;
+    }
+
 
 }

@@ -27,6 +27,10 @@ public class Segment {
     @ManyToOne(fetch = FetchType.LAZY)
     TablePlan tablePlan;
 
+    public void addDesk(Desk desk){
+        this.desks.add(desk);
+    }
+
 
 
 }

@@ -28,7 +28,6 @@ public class TablePlan {
 
     public void addSegment(Segment segment){
         this.segments.add(segment);
-
     }
 
 
