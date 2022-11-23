@@ -39,9 +39,11 @@ public class FullRepositoryTest {
         Segment segment = new Segment();
         Segment segment2 = new Segment();
 
+        //Husk at de skal forbindes til hinanden Segment <- TablePlan
         segment.setTablePlan(tablePlan);
         segment2.setTablePlan(tablePlan);
 
+        //Husk at de skal forbindes til hinanden Segment -> TablePlan
         tablePlan.addSegment(segment);
         tablePlan.addSegment(segment2);
 
