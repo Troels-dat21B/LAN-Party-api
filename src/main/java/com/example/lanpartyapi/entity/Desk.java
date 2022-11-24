@@ -16,6 +16,7 @@ import javax.persistence.CascadeType;
 @Getter
 @Setter
 @Entity
+@Table(name = "desk" )
 public class Desk {
 
     @Id

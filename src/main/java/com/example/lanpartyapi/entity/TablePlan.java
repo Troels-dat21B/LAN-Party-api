@@ -14,6 +14,7 @@ import javax.persistence.*;
 @Setter
 @Entity
 @ToString
+@Table(name = "tableplan" )
 public class TablePlan {
 
 

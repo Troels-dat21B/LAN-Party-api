@@ -12,6 +12,7 @@ import javax.persistence.*;
 @Getter
 @Setter
 @Entity
+@Table(name = "chair" )
 public class Chair {
 
     @Id
