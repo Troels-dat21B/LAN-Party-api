@@ -1,5 +1,6 @@
 package com.example.lanpartyapi.service;
 
+import com.example.lanpartyapi.dto.ChairResponse;
 import com.example.lanpartyapi.dto.TablePlanResponse;
 import com.example.lanpartyapi.entity.Chair;
 import com.example.lanpartyapi.entity.Desk;
@@ -70,9 +71,9 @@ public class AdminService {
         return plans.stream().map(tablePlan -> new TablePlanResponse(tablePlan)).collect(Collectors.toList());
     }
 
-    public List<TablePlanResponse> findAllTablePlans(){
-        List<TablePlan> plans = tablePlanRepo.findAll();
-        return plans.stream().map(tablePlan -> new TablePlanResponse(tablePlan)).collect(Collectors.toList());
+    public List<ChairResponse> findAllChairs(){
+        List<Chair> plans = this.chairRepo.findAll();
+        return plans.stream().map(chair -> new ChairResponse(chair)).collect(Collectors.toList());
     }
 
 }
