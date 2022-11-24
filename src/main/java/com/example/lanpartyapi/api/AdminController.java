@@ -30,6 +30,9 @@ public class AdminController {
 
     @GetMapping("/segments")
     public List<Segment> getSegments(){
+        List<Segment> myList = this.adminService.getSegments();
+        System.out.println("Here is the segment data:" + myList);
+        System.out.println("More data:" + myList.get(0).getSegment_id() + " " + myList.get(0).getTableplan() + " " + myList.get(0).getDesks());
         return this.adminService.getSegments();
 
     }
