@@ -20,6 +20,7 @@ public class AuthService {
     }
 
     public String signIn(LanUserRequest lanUserRequest) {
+        System.out.println(lanUserRequest.getUsername());
         String token;
 
         Optional<LanUser> lanUserOptional = this.lanUserRepository.findById(lanUserRequest.getUsername());
@@ -39,5 +40,10 @@ public class AuthService {
         }
 
         return token;
+    }
+
+    public void authorize(String accessToken) {
+        JWTHandler jwtHandler = new JWTHandler();
+        jwtHandler.decode(accessToken);
     }
 }
