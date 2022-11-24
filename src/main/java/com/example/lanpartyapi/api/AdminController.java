@@ -1,5 +1,6 @@
 package com.example.lanpartyapi.api;
 
+import com.example.lanpartyapi.dto.TablePlanResponse;
 import com.example.lanpartyapi.entity.Chair;
 import com.example.lanpartyapi.entity.Desk;
 import com.example.lanpartyapi.entity.Segment;
@@ -23,9 +24,9 @@ public class AdminController {
 
 
     @GetMapping("/tableplans")
-    public Iterable<TablePlan> getTablePlans(){
+    public Iterable<TablePlanResponse> getTablePlans(){
 
-        return this.adminService.getTablePlans();
+        return this.adminService.findAllTablePlans();
 
     }
 
