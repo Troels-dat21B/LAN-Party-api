@@ -1,5 +1,8 @@
 package com.example.lanpartyapi.api;
 
+import com.example.lanpartyapi.dto.ChairResponse;
+import com.example.lanpartyapi.dto.DeskResponse;
+import com.example.lanpartyapi.dto.SegmentResponse;
 import com.example.lanpartyapi.dto.TablePlanResponse;
 import com.example.lanpartyapi.entity.Chair;
 import com.example.lanpartyapi.entity.Desk;
@@ -18,42 +21,30 @@ public class AdminController {
 
     AdminService adminService;
 
-    AdminController(AdminService adminService){
+    AdminController(AdminService adminService) {
         this.adminService = adminService;
     }
 
 
     @GetMapping("/tableplans")
-    public Iterable<TablePlanResponse> getTablePlans(){
+    public Iterable<TablePlanResponse> getTablePlans() {
 
         return this.adminService.findAllTablePlans();
 
     }
 
     @GetMapping("/segments")
-    public List<Segment> getSegments(){
-        List<Segment> myList = this.adminService.getSegments();
-        System.out.println("Here is the segment data:" + myList);
-        System.out.println("More data:" + myList.get(0).getSegment_id() + " " + myList.get(0).getTableplan() + " " + myList.get(0).getDesks());
-        return this.adminService.getSegments();
-
+    public List<SegmentResponse> getSegments() {
+        return this.adminService.findAllSegments();
     }
+
     @GetMapping("/desks")
-    public Iterable<Desk> getDesks(){
-
-        return this.adminService.getDesks();
-
+    public Iterable<DeskResponse> getDesks() {
+        return this.adminService.findAllDesks();
     }
+
     @GetMapping("/chairs")
-    public Iterable<Chair> getTablePlan(){
-
-        return this.adminService.getChairs();
-
+    public Iterable<ChairResponse> getTablePlan() {
+        return this.adminService.findAllChairs();
     }
-
-
-
-
-
-
 }
