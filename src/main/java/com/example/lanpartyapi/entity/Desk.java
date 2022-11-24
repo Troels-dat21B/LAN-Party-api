@@ -1,6 +1,8 @@
 package com.example.lanpartyapi.entity;
 
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -22,10 +24,11 @@ public class Desk {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     int desk_id;
-
-    @OneToMany(mappedBy = "desk", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @JsonBackReference
+    @OneToMany(mappedBy = "desk", fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
     List<Chair> chairs = new ArrayList<>();
 
+    @JsonManagedReference
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "segment_id")
     private Segment segment;

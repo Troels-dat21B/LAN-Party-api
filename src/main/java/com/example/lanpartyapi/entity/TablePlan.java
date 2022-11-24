@@ -1,6 +1,7 @@
 package com.example.lanpartyapi.entity;
 
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import lombok.*;
 
 import javax.persistence.*;
@@ -8,6 +9,9 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.*;
+
+
+
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter
@@ -22,7 +26,10 @@ public class TablePlan {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     int tableplan_id;
 
-    @OneToMany(mappedBy = "tableplan", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+
+
+    @OneToMany(mappedBy = "tableplan", fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
+    @JsonBackReference
     public List<Segment> segments = new ArrayList<>();
 
     private String name;

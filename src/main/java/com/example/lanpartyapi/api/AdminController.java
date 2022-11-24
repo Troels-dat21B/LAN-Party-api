@@ -19,7 +19,7 @@ public class AdminController {
 
 
     @GetMapping("/tableplan")
-    public List<TablePlan> getTablePlan(){
+    public Iterable<TablePlan> getTablePlan(){
 
         return this.adminService.getTablePlans();
 
