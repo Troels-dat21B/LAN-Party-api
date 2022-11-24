@@ -1,6 +1,11 @@
 package com.example.lanpartyapi.service;
 
 import com.example.lanpartyapi.dto.ChairResponse;
+<<<<<<< HEAD
+=======
+import com.example.lanpartyapi.dto.DeskResponse;
+import com.example.lanpartyapi.dto.SegmentResponse;
+>>>>>>> 1326ffd55d88b296ffcd284701bf80e9a9f34c6e
 import com.example.lanpartyapi.dto.TablePlanResponse;
 import com.example.lanpartyapi.entity.Chair;
 import com.example.lanpartyapi.entity.Desk;
@@ -36,19 +41,8 @@ public class AdminService {
         this.tablePlanRepo = tablePlanRepo;
     }
 
-
-
-
     public List<Segment> getSegments() {
         return this.segmentRepo.findAll();
-    }
-
-    public List<Desk> getDesks() {
-        return this.deskRepo.findAll();
-    }
-
-    public List<Chair> getChairs() {
-        return this.chairRepo.findAll();
     }
 
     public TablePlanResponse findTablePlanById(@PathVariable int id) throws Exception {
@@ -61,19 +55,24 @@ public class AdminService {
         return plans.stream().map(tablePlan -> new TablePlanResponse(tablePlan)).collect(Collectors.toList());
     }
 
-    public List<TablePlanResponse> findAllSegments(){
-        List<TablePlan> plans = tablePlanRepo.findAll();
-        return plans.stream().map(tablePlan -> new TablePlanResponse(tablePlan)).collect(Collectors.toList());
+    public List<SegmentResponse> findAllSegments(){
+        List<Segment> segments = segmentRepo.findAll();
+        return segments.stream().map(segment -> new SegmentResponse(segment)).collect(Collectors.toList());
     }
 
-    public List<TablePlanResponse> findAllTablePlans(){
-        List<TablePlan> plans = tablePlanRepo.findAll();
-        return plans.stream().map(tablePlan -> new TablePlanResponse(tablePlan)).collect(Collectors.toList());
+    public List<DeskResponse> findAllDesks(){
+        List<Desk> desks = deskRepo.findAll();
+        return desks.stream().map(desk -> new DeskResponse(desk)).collect(Collectors.toList());
     }
 
     public List<ChairResponse> findAllChairs(){
+<<<<<<< HEAD
         List<Chair> plans = this.chairRepo.findAll();
         return plans.stream().map(chair -> new ChairResponse(chair)).collect(Collectors.toList());
+=======
+        List<Chair> chairs = chairRepo.findAll();
+        return chairs.stream().map(chair -> new ChairResponse(chair)).collect(Collectors.toList());
+>>>>>>> 1326ffd55d88b296ffcd284701bf80e9a9f34c6e
     }
 
 }
