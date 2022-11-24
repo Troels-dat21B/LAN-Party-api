@@ -1,4 +1,4 @@
-package com.example.lanpartyapi;
+package com.example.lanpartyapi.config;
 
 import com.example.lanpartyapi.entity.Chair;
 import com.example.lanpartyapi.entity.Desk;
@@ -9,7 +9,10 @@ import com.example.lanpartyapi.repository.DeskRepo;
 import com.example.lanpartyapi.repository.SegmentRepo;
 import com.example.lanpartyapi.repository.TablePlanRepo;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.stereotype.Controller;
 
+@Configuration
 public class BeforeTestConfig {
 
     @Autowired
@@ -20,7 +23,6 @@ public class BeforeTestConfig {
     SegmentRepo segmentRepo;
     @Autowired
     TablePlanRepo tablePlanRepo;
-
 
 
     public void setupBeforeTests() {
