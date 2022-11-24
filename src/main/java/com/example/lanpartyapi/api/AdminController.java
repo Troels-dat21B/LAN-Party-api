@@ -1,9 +1,30 @@
 package com.example.lanpartyapi.api;
 
-import org.springframework.web.bind.annotation.RestController;
+import com.example.lanpartyapi.entity.TablePlan;
+import com.example.lanpartyapi.service.AdminService;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
+@CrossOrigin
+@RequestMapping("/api")
 public class AdminController {
+
+    AdminService adminService;
+
+    AdminController(AdminService adminService){
+        this.adminService = adminService;
+    }
+
+
+    @GetMapping("/tableplan")
+    public List<TablePlan> getTablePlan(){
+
+        return this.adminService.getTablePlans();
+
+    }
+
 
 
 
