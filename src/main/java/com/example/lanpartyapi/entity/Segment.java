@@ -25,7 +25,7 @@ public class Segment {
 
     @JoinColumn(name = "tableplan_id")
     @ManyToOne(fetch = FetchType.LAZY)
-    TablePlan tablePlan;
+    TablePlan tableplan;
 
     public void addDesk(Desk desk){
         this.desks.add(desk);

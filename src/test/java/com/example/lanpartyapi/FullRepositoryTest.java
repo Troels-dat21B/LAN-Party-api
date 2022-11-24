@@ -39,8 +39,8 @@ public class FullRepositoryTest {
         Segment segment = new Segment();
         Segment segment2 = new Segment();
 
-        segment.setTablePlan(tablePlan);
-        segment2.setTablePlan(tablePlan);
+        segment.setTableplan(tablePlan);
+        segment2.setTableplan(tablePlan);
 
         tablePlan.addSegment(segment);
         tablePlan.addSegment(segment2);
@@ -111,7 +111,7 @@ public class FullRepositoryTest {
         List<TablePlan> tableList = this.tablePlanRepo.findAll();
         List<Segment> segmentList = this.segmentRepo.findAll();
 
-        assertEquals(segmentList.get(0).getTablePlan().getTableplan_id(), tableList.get(0).getTableplan_id());
+        assertEquals(segmentList.get(0).getTableplan().getTableplan_id(), tableList.get(0).getTableplan_id());
     }
 
     @Test

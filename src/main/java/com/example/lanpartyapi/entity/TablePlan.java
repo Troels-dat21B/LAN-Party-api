@@ -21,7 +21,7 @@ public class TablePlan {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     int tableplan_id;
 
-    @OneToMany(mappedBy = "tablePlan", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "tableplan", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     public List<Segment> segments = new ArrayList<>();
 
     private String name;
