@@ -1,5 +1,8 @@
 package com.example.lanpartyapi.service;
 
+import com.example.lanpartyapi.entity.Chair;
+import com.example.lanpartyapi.entity.Desk;
+import com.example.lanpartyapi.entity.Segment;
 import com.example.lanpartyapi.entity.TablePlan;
 import com.example.lanpartyapi.repository.ChairRepo;
 import com.example.lanpartyapi.repository.DeskRepo;
@@ -30,6 +33,18 @@ public class AdminService {
 
     public List<TablePlan> getTablePlans(){
         return this.tablePlanRepo.findAll();
+    }
+
+    public List<Segment> getSegments(){
+        return this.segmentRepo.findAll();
+    }
+
+    public List<Desk> getDesks(){
+        return this.deskRepo.findAll();
+    }
+
+    public List<Chair> getChairs(){
+        return this.chairRepo.findAll();
     }
 
 }
