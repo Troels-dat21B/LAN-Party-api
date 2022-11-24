@@ -4,6 +4,7 @@ import javax.persistence.CascadeType;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import lombok.*;
@@ -11,6 +12,7 @@ import lombok.*;
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
+
 
 @AllArgsConstructor
 @NoArgsConstructor
@@ -24,11 +26,13 @@ public class Segment {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     int segment_id;
 
+
+
     @JsonBackReference
     @OneToMany(mappedBy = "segment", fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
     List<Desk> desks = new ArrayList<>();
 
-
+    @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
     @JsonManagedReference
     @JoinColumn(name = "tableplan_id")
     @ManyToOne(fetch = FetchType.LAZY)
