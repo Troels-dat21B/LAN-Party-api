@@ -109,5 +109,15 @@ public class AdminService {
     public void createTablePlan(String name) {
         this.tablePlanRepo.save(new TablePlan(name));
     }
+
+    public TablePlan getTablePlanInfo(int id) {
+
+        return this.tablePlanRepo.findById(id).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Table Plan not found"));
+
+    }
+
+    public List<TablePlan> getAllTablePlansInfo() {
+        return tablePlanRepo.findAll();
+    }
 }
 

@@ -11,14 +11,13 @@ import javax.persistence.CascadeType;
 import javax.persistence.*;
 
 
-
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter
 @Setter
 @Entity
 @ToString
-@Table(name = "tableplan" )
+@Table(name = "tableplan")
 public class TablePlan {
 
 
@@ -27,21 +26,19 @@ public class TablePlan {
     int tableplan_id;
 
 
-
     @OneToMany(mappedBy = "tableplan", fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
     @JsonBackReference
     public List<Segment> segments = new ArrayList<>();
 
     private String name;
 
-    public void addSegment(Segment segment){
+    public void addSegment(Segment segment) {
         this.segments.add(segment);
     }
 
-    public TablePlan(String name){
+    public TablePlan(String name) {
         this.name = name;
     }
-
 
 
 }

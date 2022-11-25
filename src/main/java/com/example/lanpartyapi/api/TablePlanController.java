@@ -29,12 +29,22 @@ public class TablePlanController {
     public List<TablePlanResponse> getTablePlans() {
 
         return this.adminService.findAllTablePlans();
-
     }
 
     @PostMapping("/createtableplan")
     public void createTablePlan(@RequestParam String name) {
         this.adminService.createTablePlan(name);
+    }
+
+    @GetMapping("/tableplaninfo")
+    public TablePlan tablePlanInfo(@RequestParam int id){
+        return adminService.getTablePlanInfo(id);
+    }
+
+    @GetMapping("/alltableplansinfo")
+    public List<TablePlan> allTablePlansInfo(){
+        System.out.println(adminService.getAllTablePlansInfo().get(0).getSegments());
+        return adminService.getAllTablePlansInfo();
     }
 
 
