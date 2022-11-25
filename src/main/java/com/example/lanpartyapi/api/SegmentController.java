@@ -9,6 +9,7 @@ import com.example.lanpartyapi.entity.Desk;
 import com.example.lanpartyapi.entity.Segment;
 import com.example.lanpartyapi.entity.TablePlan;
 import com.example.lanpartyapi.service.AdminService;
+import org.springframework.data.repository.query.Param;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -29,4 +30,11 @@ public class SegmentController {
     public List<SegmentResponse> getSegments() {
         return this.adminService.findAllSegments();
     }
+
+
+    @GetMapping("/segmentsfromtableplan")
+    public List<SegmentResponse> getSegmentsFromTablePlan(@RequestParam int id) {
+        return this.adminService.findAllSegments();
+    }
+
 }

@@ -62,10 +62,8 @@ public class AdminService {
     public List<ChairResponse> findAllChairs(){
         List<Chair> plans = this.chairRepo.findAll();
         return plans.stream().map(chair -> new ChairResponse(chair)).collect(Collectors.toList());
-    }
 
-    public DeskResponse getOneDesk(int id){
-        return deskRepo.findById(id).orElseThrow((-> new));
+        this.segmentRepo.
     }
 
 }

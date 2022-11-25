@@ -33,12 +33,7 @@ public class DeskController {
 
     @GetMapping("/desk")
     public DeskResponse getOneDesk(){
-        return this.adminService.find
+        return null;
     }
 
-    @GetMapping("/updatedesk")
-
-    @GetMapping("/deletedesk")
-
-    @GetMapping("/createdesk")
 }
