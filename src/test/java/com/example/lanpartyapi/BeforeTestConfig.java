@@ -1,4 +1,4 @@
-package com.example.lanpartyapi.config;
+package com.example.lanpartyapi;
 
 import com.example.lanpartyapi.entity.Chair;
 import com.example.lanpartyapi.entity.Desk;

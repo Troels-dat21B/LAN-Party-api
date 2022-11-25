@@ -24,4 +24,21 @@ public class DeskController {
     DeskController(AdminService adminService) {
         this.adminService = adminService;
     }
+
+    @GetMapping("/desks")
+    public Iterable<DeskResponse> getDesks() {
+        return this.adminService.findAllDesks();
+    }
+
+
+    @GetMapping("/desk")
+    public DeskResponse getOneDesk(){
+        return this.adminService.find
+    }
+
+    @GetMapping("/updatedesk")
+
+    @GetMapping("/deletedesk")
+
+    @GetMapping("/createdesk")
 }

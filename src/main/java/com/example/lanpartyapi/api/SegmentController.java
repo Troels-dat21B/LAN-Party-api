@@ -24,4 +24,9 @@ public class SegmentController {
     SegmentController(AdminService adminService) {
         this.adminService = adminService;
     }
+
+    @GetMapping("/segments")
+    public List<SegmentResponse> getSegments() {
+        return this.adminService.findAllSegments();
+    }
 }

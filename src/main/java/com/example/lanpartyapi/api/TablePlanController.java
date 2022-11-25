@@ -24,4 +24,11 @@ public class TablePlanController {
     TablePlanController(AdminService adminService) {
         this.adminService = adminService;
     }
+
+    @GetMapping("/tableplans")
+    public List<TablePlanResponse> getTablePlans() {
+
+        return this.adminService.findAllTablePlans();
+
+    }
 }

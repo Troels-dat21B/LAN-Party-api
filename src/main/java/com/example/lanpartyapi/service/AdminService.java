@@ -64,4 +64,8 @@ public class AdminService {
         return plans.stream().map(chair -> new ChairResponse(chair)).collect(Collectors.toList());
     }
 
+    public DeskResponse getOneDesk(int id){
+        return deskRepo.findById(id).orElseThrow((-> new));
+    }
+
 }
