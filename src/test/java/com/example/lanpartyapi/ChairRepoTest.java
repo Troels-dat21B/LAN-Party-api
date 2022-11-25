@@ -15,7 +15,7 @@ import java.util.List;
 @DataJpaTest
 public class ChairRepoTest {
     @Autowired
-    ChairRepo cR;
+    public static ChairRepo cR;
 
     @BeforeEach
     void chairSetup(){

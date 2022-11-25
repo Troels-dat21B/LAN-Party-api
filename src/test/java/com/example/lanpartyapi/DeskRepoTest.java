@@ -13,7 +13,7 @@ import java.util.List;
 @DataJpaTest
 public class DeskRepoTest {
     @Autowired
-    DeskRepo tR;
+    public static DeskRepo tR;
 
     @BeforeEach
     void beforeEachTest(){
