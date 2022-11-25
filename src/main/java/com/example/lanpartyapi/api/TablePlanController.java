@@ -32,6 +32,7 @@ public class TablePlanController {
 
     }
 
+
     @PostMapping("/createtableplan")
     public void createTablePlan(@RequestParam String name) {
         this.adminService.createTablePlan(name);

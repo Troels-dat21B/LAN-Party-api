@@ -37,4 +37,9 @@ public class SegmentController {
         return this.adminService.getSegmentFromTablePlan(id);
     }
 
+    @PostMapping("/createsegment")
+    public void createSegmentsFromTablePlan(@RequestParam int id){
+        this.adminService.createSegmentFromTablePlan(id);
+    }
+
 }
