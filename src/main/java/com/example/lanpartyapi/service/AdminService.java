@@ -17,6 +17,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.server.ResponseStatusException;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -40,30 +41,49 @@ public class AdminService {
     }
 
     public TablePlanResponse findTablePlanById(@PathVariable int id) throws Exception {
-        TablePlan found = tablePlanRepo.findById(id).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "User not found"));
+        TablePlan found = tablePlanRepo.findById(id).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Table Plan not found"));
         return new TablePlanResponse(found);
     }
 
-    public List<TablePlanResponse> findAllTablePlans(){
+    public List<TablePlanResponse> findAllTablePlans() {
         List<TablePlan> plans = tablePlanRepo.findAll();
         return plans.stream().map(tablePlan -> new TablePlanResponse(tablePlan)).collect(Collectors.toList());
     }
 
-    public List<SegmentResponse> findAllSegments(){
+    public List<SegmentResponse> findAllSegments() {
         List<Segment> segments = segmentRepo.findAll();
         return segments.stream().map(segment -> new SegmentResponse(segment)).collect(Collectors.toList());
     }
 
-    public List<DeskResponse> findAllDesks(){
+    public List<DeskResponse> findAllDesks() {
         List<Desk> desks = deskRepo.findAll();
         return desks.stream().map(desk -> new DeskResponse(desk)).collect(Collectors.toList());
     }
 
-    public List<ChairResponse> findAllChairs(){
+    public List<ChairResponse> findAllChairs() {
         List<Chair> plans = this.chairRepo.findAll();
         return plans.stream().map(chair -> new ChairResponse(chair)).collect(Collectors.toList());
 
+<<<<<<< HEAD
         this.segmentRepo.
+=======
+    public DeskResponse getOneDesk(int id) {
+        Desk found = deskRepo.findById(id).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Desk not found"));
+
+        return new DeskResponse(found);
+>>>>>>> 5e459588ee4ea0676e7571b53800278e88230252
     }
 
+
+    public List<DeskResponse> getDeskFromSegment(int id) {
+        Segment segment = segmentRepo.findById(id).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Segment not found"));
+        List<Desk> desks = segment.getDesks();
+        List<DeskResponse> found = new ArrayList<>();
+
+        for (int i = 0; i < desks.size(); i++) {
+            found.add(new DeskResponse(desks.get(i)));
+        }
+
+        return found;
+    }
 }

@@ -3,7 +3,6 @@ package com.example.lanpartyapi;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import com.example.lanpartyapi.api.AdminController;
-import com.example.lanpartyapi.config.BeforeTestConfig;
 import com.example.lanpartyapi.dto.TablePlanResponse;
 import com.example.lanpartyapi.entity.Chair;
 import com.example.lanpartyapi.entity.Desk;

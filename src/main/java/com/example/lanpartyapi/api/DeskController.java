@@ -32,8 +32,29 @@ public class DeskController {
 
 
     @GetMapping("/desk")
+<<<<<<< HEAD
     public DeskResponse getOneDesk(){
         return null;
     }
 
+=======
+    public DeskResponse getOneDesk(@RequestParam int id){
+        return this.adminService.getOneDesk(id);
+    }
+
+    //TODO desk from segment
+    @GetMapping("/deskfromsegment")
+    public List<DeskResponse> getDesksFromSegment(@RequestParam int id){//<-- Segment id
+
+        return this.adminService.getDeskFromSegment(id);
+    }
+
+
+/*
+    @GetMapping("/updatedesk")
+
+    @GetMapping("/deletedesk")
+
+    @GetMapping("/createdesk")*/
+>>>>>>> 5e459588ee4ea0676e7571b53800278e88230252
 }
