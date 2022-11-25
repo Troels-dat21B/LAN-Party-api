@@ -32,13 +32,22 @@ public class DeskController {
 
 
     @GetMapping("/desk")
-    public DeskResponse getOneDesk(){
-        return this.adminService.find
+    public DeskResponse getOneDesk(@RequestParam int id){
+        return this.adminService.getOneDesk(id);
     }
 
+    //TODO desk from segment
+    @GetMapping("/deskfromsegment")
+    public List<DeskResponse> getDesksFromSegment(@RequestParam int id){//<-- Segment id
+
+        return this.adminService.getDeskFromSegment(id);
+    }
+
+
+/*
     @GetMapping("/updatedesk")
 
     @GetMapping("/deletedesk")
 
-    @GetMapping("/createdesk")
+    @GetMapping("/createdesk")*/
 }
