@@ -28,4 +28,9 @@ public class ChairController {
     public Iterable<ChairResponse> getTablePlan() {
         return this.adminService.findAllChairs();
     }
+
+    @GetMapping("/chairsFromDesk")
+    public List<ChairResponse> getChairsFromDesk(@RequestParam int id) {
+        return this.adminService.getChairsFromDesk(id);
+    }
 }

@@ -34,7 +34,7 @@ public class SegmentController {
 
     @GetMapping("/segmentsfromtableplan")
     public List<SegmentResponse> getSegmentsFromTablePlan(@RequestParam int id) {
-        return this.adminService.findAllSegments();
+        return this.adminService.getSegmentFromTablePlan(id);
     }
 
 }
