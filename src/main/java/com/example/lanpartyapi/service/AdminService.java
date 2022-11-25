@@ -1,5 +1,6 @@
 package com.example.lanpartyapi.service;
 
+import java.lang.IllegalArgumentException;
 import com.example.lanpartyapi.dto.ChairResponse;
 import com.example.lanpartyapi.dto.DeskResponse;
 import com.example.lanpartyapi.dto.SegmentResponse;
@@ -108,6 +109,20 @@ public class AdminService {
 
     public void createTablePlan(String name) {
         this.tablePlanRepo.save(new TablePlan(name));
+    }
+
+    public void createSegmentFromTablePlan(int id) {
+
+        if (this.tablePlanRepo.findById(id).isPresent()){
+            TablePlan tablePlan = this.tablePlanRepo.findById(id).get();
+            Segment segment = new Segment();
+            tablePlan.addSegment(segment);
+            segment.setTableplan(tablePlan);
+            this.tablePlanRepo.save(tablePlan);
+            this.segmentRepo.save(segment);
+        } else {
+            throw new IllegalArgumentException("Tableplan not found through provided ID");
+        }
     }
 
     public TablePlan getTablePlanInfo(int id) {
