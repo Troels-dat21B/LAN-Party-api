@@ -63,27 +63,44 @@ public class AdminService {
     public List<ChairResponse> findAllChairs() {
         List<Chair> plans = this.chairRepo.findAll();
         return plans.stream().map(chair -> new ChairResponse(chair)).collect(Collectors.toList());
+    }
 
-<<<<<<< HEAD
-        this.segmentRepo.
-=======
     public DeskResponse getOneDesk(int id) {
         Desk found = deskRepo.findById(id).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Desk not found"));
 
         return new DeskResponse(found);
->>>>>>> 5e459588ee4ea0676e7571b53800278e88230252
     }
-
 
     public List<DeskResponse> getDeskFromSegment(int id) {
         Segment segment = segmentRepo.findById(id).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Segment not found"));
         List<Desk> desks = segment.getDesks();
         List<DeskResponse> found = new ArrayList<>();
 
-        for (int i = 0; i < desks.size(); i++) {
+        return desks.stream().map(desk -> new DeskResponse(desk)).collect(Collectors.toList());
+
+ /*       for (int i = 0; i < desks.size(); i++) {
             found.add(new DeskResponse(desks.get(i)));
         }
-
-        return found;
+        return found;*/
     }
+
+    public List<SegmentResponse> getSegmentFromTablePlan(int id) {
+        TablePlan tablePlan = this.tablePlanRepo.findById(id).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "TablePlan not found"));
+        List<Segment> segments = tablePlan.getSegments();
+        List<SegmentResponse> found = new ArrayList<>();
+
+        return segments.stream().map(segment -> new SegmentResponse(segment)).collect(Collectors.toList());
+    }
+
+    public List<ChairResponse> getChairsFromDesk(int id) {
+        Desk desk = deskRepo.findById(id).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Segment not found"));
+        List<Chair> chairs = desk.getChairs();
+        List<ChairResponse> found = new ArrayList<>();
+
+        return chairs.stream().map(chair -> new ChairResponse(chair)).collect(Collectors.toList());
+        //for (int i = 0; i < chairs.size(); i++) {
+        //    found.add(new ChairResponse(chairs.get(i)));
+    }
+
 }
+

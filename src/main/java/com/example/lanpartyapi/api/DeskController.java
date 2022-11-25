@@ -30,14 +30,7 @@ public class DeskController {
         return this.adminService.findAllDesks();
     }
 
-
     @GetMapping("/desk")
-<<<<<<< HEAD
-    public DeskResponse getOneDesk(){
-        return null;
-    }
-
-=======
     public DeskResponse getOneDesk(@RequestParam int id){
         return this.adminService.getOneDesk(id);
     }
@@ -56,5 +49,4 @@ public class DeskController {
     @GetMapping("/deletedesk")
 
     @GetMapping("/createdesk")*/
->>>>>>> 5e459588ee4ea0676e7571b53800278e88230252
 }
