@@ -1,11 +1,8 @@
 package com.example.lanpartyapi.service;
 
 import com.example.lanpartyapi.dto.ChairResponse;
-<<<<<<< HEAD
-=======
 import com.example.lanpartyapi.dto.DeskResponse;
 import com.example.lanpartyapi.dto.SegmentResponse;
->>>>>>> 1326ffd55d88b296ffcd284701bf80e9a9f34c6e
 import com.example.lanpartyapi.dto.TablePlanResponse;
 import com.example.lanpartyapi.entity.Chair;
 import com.example.lanpartyapi.entity.Desk;
@@ -15,14 +12,11 @@ import com.example.lanpartyapi.repository.ChairRepo;
 import com.example.lanpartyapi.repository.DeskRepo;
 import com.example.lanpartyapi.repository.SegmentRepo;
 import com.example.lanpartyapi.repository.TablePlanRepo;
-import lombok.NoArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.server.ResponseStatusException;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -66,13 +60,8 @@ public class AdminService {
     }
 
     public List<ChairResponse> findAllChairs(){
-<<<<<<< HEAD
         List<Chair> plans = this.chairRepo.findAll();
         return plans.stream().map(chair -> new ChairResponse(chair)).collect(Collectors.toList());
-=======
-        List<Chair> chairs = chairRepo.findAll();
-        return chairs.stream().map(chair -> new ChairResponse(chair)).collect(Collectors.toList());
->>>>>>> 1326ffd55d88b296ffcd284701bf80e9a9f34c6e
     }
 
 }

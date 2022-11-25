@@ -27,7 +27,7 @@ public class AdminController {
 
 
     @GetMapping("/tableplans")
-    public Iterable<TablePlanResponse> getTablePlans() {
+    public List<TablePlanResponse> getTablePlans() {
 
         return this.adminService.findAllTablePlans();
 
