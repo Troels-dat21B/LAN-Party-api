@@ -14,7 +14,10 @@ import com.example.lanpartyapi.repository.SegmentRepo;
 import com.example.lanpartyapi.repository.TablePlanRepo;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.server.ResponseStatusException;
 
 import java.util.ArrayList;
@@ -93,7 +96,7 @@ public class AdminService {
     }
 
     public List<ChairResponse> getChairsFromDesk(int id) {
-        Desk desk = deskRepo.findById(id).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Segment not found"));
+        Desk desk = this.deskRepo.findById(id).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Segment not found"));
         List<Chair> chairs = desk.getChairs();
         List<ChairResponse> found = new ArrayList<>();
 
@@ -102,5 +105,9 @@ public class AdminService {
         //    found.add(new ChairResponse(chairs.get(i)));
     }
 
+
+    public void createTablePlan(String name) {
+        this.tablePlanRepo.save(new TablePlan(name));
+    }
 }
 

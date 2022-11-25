@@ -13,7 +13,6 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-
 @RestController
 @CrossOrigin
 @RequestMapping("/api")
@@ -43,10 +42,13 @@ public class DeskController {
     }
 
 
-/*
+
+
+    /*
+    @GetMapping("/createdesk")
+
     @GetMapping("/updatedesk")
 
     @GetMapping("/deletedesk")
-
-    @GetMapping("/createdesk")*/
+     */
 }

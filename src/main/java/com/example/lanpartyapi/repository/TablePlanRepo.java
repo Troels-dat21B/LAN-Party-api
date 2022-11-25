@@ -7,6 +7,4 @@ import java.util.List;
 
 public interface TablePlanRepo extends JpaRepository<TablePlan, Integer> {
     TablePlan findByName(String name);
-
-
 }

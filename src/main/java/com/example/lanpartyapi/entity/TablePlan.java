@@ -38,6 +38,10 @@ public class TablePlan {
         this.segments.add(segment);
     }
 
+    public TablePlan(String name){
+        this.name = name;
+    }
+
 
 
 }
