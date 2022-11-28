@@ -2,7 +2,9 @@ package com.example.lanpartyapi.service;
 
 
 import com.example.lanpartyapi.dto.TablePlanResponse;
+import com.example.lanpartyapi.entity.Segment;
 import com.example.lanpartyapi.entity.TablePlan;
+import com.example.lanpartyapi.repository.SegmentRepo;
 import com.example.lanpartyapi.repository.TablePlanRepo;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
@@ -17,9 +19,11 @@ import java.util.stream.Collectors;
 public class TablePlanService {
 
     TablePlanRepo tablePlanRepo;
+    SegmentRepo segmentRepo;
 
-    public TablePlanService(TablePlanRepo tablePlanRepo) {
+    public TablePlanService(TablePlanRepo tablePlanRepo, SegmentRepo segmentRepo) {
         this.tablePlanRepo = tablePlanRepo;
+        this.segmentRepo = segmentRepo;
     }
 
 
@@ -44,11 +48,14 @@ public class TablePlanService {
         }
     }
 
-    public TablePlan getTablePlanInfo(int id) {
-        return null;
+    public List<Segment> getTablePlanInfo(int id) {
+        TablePlan found = tablePlanRepo.findById(id).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Table Plan not found"));
+        return this.segmentRepo.findSegmentsBytableplan_id(found.getTableplan_id());
+
     }
 
     public List<TablePlan> getAllTablePlansInfo() {
+
         return null;
     }
 }

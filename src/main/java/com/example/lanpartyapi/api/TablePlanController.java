@@ -1,6 +1,7 @@
 package com.example.lanpartyapi.api;
 
 import com.example.lanpartyapi.dto.TablePlanResponse;
+import com.example.lanpartyapi.entity.Segment;
 import com.example.lanpartyapi.entity.TablePlan;
 import com.example.lanpartyapi.service.TablePlanService;
 import org.springframework.web.bind.annotation.*;
@@ -39,15 +40,20 @@ public class TablePlanController {
     }
 
     @GetMapping("/tableplaninfo")
-    public TablePlan tablePlanInfo(@RequestParam int id){
+    public List<Segment> tablePlanInfo(@RequestParam int id){
         return tablePlanService.getTablePlanInfo(id);
     }
+
+
 
     @GetMapping("/alltableplansinfo")
     public List<TablePlan> allTablePlansInfo(){
         System.out.println(tablePlanService.getAllTablePlansInfo().get(0).getSegments());
         return tablePlanService.getAllTablePlansInfo();
     }
+
+
+
 
 
 }
