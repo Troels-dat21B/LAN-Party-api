@@ -59,7 +59,9 @@ public class ChairService {
         }
         chair.setChair_id(body.getId());
         updateChairState(chair);
-        chair.setDesk(body.getDesk());
+        //chair.setDesk(body.getDesk());
+
+        chairRepo.save(chair);
     }
     private void updateChairState(Chair chair) {
         chair.set_reserved(!chair.is_reserved());

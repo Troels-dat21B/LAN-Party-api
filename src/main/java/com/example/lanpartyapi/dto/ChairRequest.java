@@ -11,16 +11,16 @@ import lombok.Setter;
 @NoArgsConstructor
 public class ChairRequest {
     int id;
-    Desk desk;
+   // Desk desk;
     boolean is_reserved;
 
     public static Chair getChairEntity(ChairRequest c){
-        return new Chair(c.getId(), c.getDesk(), c.is_reserved());
+        return new Chair(c.getId(), new Desk(), c.is_reserved());
     }
 
     public ChairRequest(Chair c){
         this.id = c.getChair_id();
-        this.desk = c.getDesk();
+        //this.desk = c.getDesk();
         this.is_reserved = c.is_reserved();
     }
 }
