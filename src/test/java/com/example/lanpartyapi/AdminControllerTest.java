@@ -2,8 +2,6 @@ package com.example.lanpartyapi;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-import com.example.lanpartyapi.api.AdminController;
-import com.example.lanpartyapi.dto.TablePlanResponse;
 import com.example.lanpartyapi.entity.Chair;
 import com.example.lanpartyapi.entity.Desk;
 import com.example.lanpartyapi.entity.Segment;
@@ -12,13 +10,10 @@ import com.example.lanpartyapi.repository.ChairRepo;
 import com.example.lanpartyapi.repository.DeskRepo;
 import com.example.lanpartyapi.repository.SegmentRepo;
 import com.example.lanpartyapi.repository.TablePlanRepo;
-import com.example.lanpartyapi.service.AdminService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
-
-import java.util.List;
 
 @DataJpaTest
 public class AdminControllerTest {

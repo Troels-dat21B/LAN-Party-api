@@ -1,14 +1,7 @@
 package com.example.lanpartyapi.api;
 
 import com.example.lanpartyapi.dto.*;
-import com.example.lanpartyapi.entity.Chair;
-import com.example.lanpartyapi.entity.Desk;
-import com.example.lanpartyapi.entity.Segment;
-import com.example.lanpartyapi.entity.TablePlan;
-import com.example.lanpartyapi.service.AdminService;
 import com.example.lanpartyapi.service.ChairService;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
