@@ -26,7 +26,7 @@ public class Desk {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     int desk_id;
     @JsonBackReference
-    @OneToMany(mappedBy = "desk", fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
+    @OneToMany(mappedBy = "desk", fetch = FetchType.LAZY, cascade = CascadeType.REMOVE)
     List<Chair> chairs = new ArrayList<>();
 
 

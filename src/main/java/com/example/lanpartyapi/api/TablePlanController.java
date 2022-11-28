@@ -9,6 +9,7 @@ import com.example.lanpartyapi.entity.Desk;
 import com.example.lanpartyapi.entity.Segment;
 import com.example.lanpartyapi.entity.TablePlan;
 import com.example.lanpartyapi.service.AdminService;
+import com.example.lanpartyapi.service.TablePlanService;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -19,33 +20,40 @@ import java.util.List;
 @RequestMapping("/api")
 public class TablePlanController {
 
-    AdminService adminService;
+    TablePlanService tablePlanService;
 
-    TablePlanController(AdminService adminService) {
-        this.adminService = adminService;
+    TablePlanController(TablePlanService tablePlanService) {
+        this.tablePlanService = tablePlanService;
     }
 
     @GetMapping("/tableplans")
     public List<TablePlanResponse> getTablePlans() {
 
-        return this.adminService.findAllTablePlans();
+        return this.tablePlanService.findAllTablePlans();
+
     }
 
 
     @PostMapping("/createtableplan")
     public void createTablePlan(@RequestParam String name) {
-        this.adminService.createTablePlan(name);
+        this.tablePlanService.createTablePlan(name);
+    }
+
+
+    @DeleteMapping("/deletetableplan")
+    public void deleteTablePlan(@RequestParam int id) {
+        this.tablePlanService.deleteTablePlan(id);
     }
 
     @GetMapping("/tableplaninfo")
     public TablePlan tablePlanInfo(@RequestParam int id){
-        return adminService.getTablePlanInfo(id);
+        return tablePlanService.getTablePlanInfo(id);
     }
 
     @GetMapping("/alltableplansinfo")
     public List<TablePlan> allTablePlansInfo(){
-        System.out.println(adminService.getAllTablePlansInfo().get(0).getSegments());
-        return adminService.getAllTablePlansInfo();
+        System.out.println(tablePlanService.getAllTablePlansInfo().get(0).getSegments());
+        return tablePlanService.getAllTablePlansInfo();
     }
 
 

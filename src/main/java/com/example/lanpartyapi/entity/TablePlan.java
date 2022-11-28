@@ -11,6 +11,7 @@ import javax.persistence.CascadeType;
 import javax.persistence.*;
 
 
+
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter
@@ -26,7 +27,8 @@ public class TablePlan {
     int tableplan_id;
 
 
-    @OneToMany(mappedBy = "tableplan", fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
+
+    @OneToMany(mappedBy = "tableplan", fetch = FetchType.LAZY, cascade = CascadeType.REMOVE)
     @JsonBackReference
     public List<Segment> segments = new ArrayList<>();
 
@@ -39,6 +41,7 @@ public class TablePlan {
     public TablePlan(String name) {
         this.name = name;
     }
+
 
 
 }
