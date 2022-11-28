@@ -26,6 +26,7 @@ public class ChairController {
     ChairController(ChairService chairService) {
         this.chairService = chairService;
     }
+
     @GetMapping("/chairs")
     public Iterable<ChairResponse> getTablePlan() {
         return this.chairService.findAllChairs();
@@ -35,30 +36,23 @@ public class ChairController {
     public List<ChairResponse> getChairsFromDesk(@RequestParam int id) {
         return this.chairService.getChairsFromDesk(id);
     }
+
     @DeleteMapping("/deletechair")
     public void deleteChair(@RequestParam int id) {
         this.chairService.deleteChair(id);
     }
 
 
-
     @PostMapping("/createchair")
-    public void createChairFromDesk(@RequestParam int id){
+    public void createChairFromDesk(@RequestParam int id) {
         this.chairService.createChairFromDesk(id);
     }
 
     @PutMapping("/updatechair/{chair_id}")
-    public ResponseEntity<Boolean> updateChai00r(@RequestBody ChairRequest body, @PathVariable("chair_id") int id){
+    public ResponseEntity<Boolean> updateChai00r(@RequestBody ChairRequest body, @PathVariable("chair_id") int id) {
         this.chairService.updateChair(body, id);
         return new ResponseEntity<>(true, HttpStatus.OK);
     }
 
-    /*
-    @GetMapping("/findChairById")
-    public Chair
-*/
-
-
-        /*
 
 }
