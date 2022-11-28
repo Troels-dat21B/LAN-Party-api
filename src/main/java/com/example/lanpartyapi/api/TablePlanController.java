@@ -1,11 +1,13 @@
 package com.example.lanpartyapi.api;
 
 import com.example.lanpartyapi.dto.TablePlanResponse;
+import com.example.lanpartyapi.entity.Chair;
 import com.example.lanpartyapi.entity.Segment;
 import com.example.lanpartyapi.entity.TablePlan;
 import com.example.lanpartyapi.service.TablePlanService;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -39,10 +41,10 @@ public class TablePlanController {
         this.tablePlanService.deleteTablePlan(id);
     }
 
-    @GetMapping("/tableplaninfo")
-    public List<Segment> tablePlanInfo(@RequestParam int id){
+/*    @GetMapping("/tableplaninfo")
+    public List<List<Chair>> tablePlanInfo(@RequestParam int id){
         return tablePlanService.getTablePlanInfo(id);
-    }
+    }*/
 
 
 

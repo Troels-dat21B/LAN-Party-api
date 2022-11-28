@@ -24,7 +24,6 @@ public class Chair {
     int chair_id;
 
     @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
-    @JsonManagedReference
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "desk_id")
     private Desk desk;

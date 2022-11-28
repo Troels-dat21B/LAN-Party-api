@@ -2,7 +2,7 @@ package com.example.lanpartyapi.service;
 
 
 import com.example.lanpartyapi.dto.TablePlanResponse;
-import com.example.lanpartyapi.entity.Segment;
+import com.example.lanpartyapi.entity.Chair;
 import com.example.lanpartyapi.entity.TablePlan;
 import com.example.lanpartyapi.repository.SegmentRepo;
 import com.example.lanpartyapi.repository.TablePlanRepo;
@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.server.ResponseStatusException;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -47,12 +48,25 @@ public class TablePlanService {
             this.tablePlanRepo.delete(tablePlan.get());
         }
     }
-
-    public List<Segment> getTablePlanInfo(int id) {
+/*
+    public List<List<Chair>> getTablePlanInfo(int id) {
+        List<List> finalList = new ArrayList<>();
         TablePlan found = tablePlanRepo.findById(id).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Table Plan not found"));
-        return this.segmentRepo.findSegmentsBytableplan_id(found.getTableplan_id());
 
-    }
+        for (int i = 0; i < found.getSegments().size(); i++) {
+            for (int j = 0; j < found.getSegments().get(i).getDesks().size(); j++) {
+                for (int k = 0; k < found.getSegments().get(i).getDesks().get(j).getChairs().size(); k++) {
+
+                    //finalList.add
+
+                }
+            }
+        }
+
+
+        return this.segmentRepo.findSegmentsByTableplan_id(found.getTableplan_id());
+
+    }*/
 
     public List<TablePlan> getAllTablePlansInfo() {
 
