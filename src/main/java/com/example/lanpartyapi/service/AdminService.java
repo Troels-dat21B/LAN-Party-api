@@ -119,7 +119,7 @@ public class AdminService {
             tablePlan.addSegment(segment);
             segment.setTableplan(tablePlan);
             this.tablePlanRepo.save(tablePlan);
-            this.segmentRepo.save(segment);
+            //this.segmentRepo.save(segment);
         } else {
             throw new IllegalArgumentException("Tableplan not found through provided ID");
         }
