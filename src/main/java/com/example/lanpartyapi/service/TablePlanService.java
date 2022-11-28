@@ -43,4 +43,12 @@ public class TablePlanService {
             this.tablePlanRepo.delete(tablePlan.get());
         }
     }
+
+    public TablePlan getTablePlanInfo(int id) {
+        return null;
+    }
+
+    public List<TablePlan> getAllTablePlansInfo() {
+        return null;
+    }
 }

@@ -1,6 +1,7 @@
 package com.example.lanpartyapi.service;
 
 
+import com.example.lanpartyapi.dto.ChairRequest;
 import com.example.lanpartyapi.dto.ChairResponse;
 import com.example.lanpartyapi.entity.Chair;
 import com.example.lanpartyapi.entity.Desk;
@@ -68,5 +69,22 @@ public class ChairService {
         } else {
             throw new IllegalArgumentException("Tableplan not found through provided ID");
         }
+    }
+
+
+    public void updateChair(ChairRequest body, int id) {
+
+        Chair chair = chairRepo.findById(id).orElseThrow(()-> new ResponseStatusException(HttpStatus.BAD_REQUEST, "Chair not found"));
+        if(body.getId() != chair.getChair_id()){
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Cannot change this chair");
+        }
+        chair.setChair_id(body.getId());
+        updateChairState(chair);
+        //chair.setDesk(body.getDesk());
+
+        chairRepo.save(chair);
+    }
+    private void updateChairState(Chair chair) {
+        chair.set_reserved(!chair.is_reserved());
     }
 }

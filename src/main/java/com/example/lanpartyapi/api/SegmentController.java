@@ -48,4 +48,12 @@ public class SegmentController {
         this.segmentService.deleteSegment(id);
     }
 
+
+        /*
+    @GetMapping(/"finddeskById")
+
+    @PutMapping("/editdesk")
+
+    @DeleteMapping("/deletedesk")
+     */
 }
