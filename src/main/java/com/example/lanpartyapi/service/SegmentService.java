@@ -59,4 +59,8 @@ public class SegmentService {
             this.segmentRepo.delete(segment.get());
         }
     }
+
+    public List<Segment> getSegments() {
+        return this.segmentRepo.findAll();
+    }
 }

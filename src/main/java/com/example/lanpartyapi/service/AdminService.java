@@ -38,9 +38,6 @@ public class AdminService {
         this.tablePlanRepo = tablePlanRepo;
     }
 
-    public List<Segment> getSegments() {
-        return this.segmentRepo.findAll();
-    }
 
 
 

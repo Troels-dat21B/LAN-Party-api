@@ -44,16 +44,14 @@ public class DeskController {
     }
 
 
-
-
-    /*
-    @GetMapping("/createdesk")
-
-    @GetMapping("/updatedesk")
-*/
     @DeleteMapping("/deletedesk")
     public void deleteDesk(@RequestParam int id){
         this.deskService.deleteDesk(id);
+    }
+
+    @PostMapping("/createdesk")
+    public void createDeskFromSegment(@RequestParam int id){
+        this.deskService.createDeskFromSegment(id);
     }
 
 }

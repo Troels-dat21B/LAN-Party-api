@@ -34,12 +34,16 @@ public class ChairController {
     public List<ChairResponse> getChairsFromDesk(@RequestParam int id) {
         return this.chairService.getChairsFromDesk(id);
     }
-
-
     @DeleteMapping("/deletechair")
     public void deleteChair(@RequestParam int id) {
         this.chairService.deleteChair(id);
     }
 
+
+
+    @PostMapping("/createchair")
+    public void createChairFromDesk(@RequestParam int id){
+        this.chairService.createChairFromDesk(id);
+    }
 
 }

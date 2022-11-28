@@ -4,6 +4,7 @@ package com.example.lanpartyapi.service;
 import com.example.lanpartyapi.dto.DeskResponse;
 import com.example.lanpartyapi.entity.Desk;
 import com.example.lanpartyapi.entity.Segment;
+import com.example.lanpartyapi.entity.TablePlan;
 import com.example.lanpartyapi.repository.DeskRepo;
 import com.example.lanpartyapi.repository.SegmentRepo;
 import org.springframework.http.HttpStatus;
@@ -54,6 +55,21 @@ public class DeskService {
         Optional<Desk> desk = this.deskRepo.findById(id);
         if (desk.isPresent()){
             this.deskRepo.delete(desk.get());
+        }
+    }
+
+
+    public void createDeskFromSegment(int id) {
+
+        if (this.segmentRepo.findById(id).isPresent()){
+            Segment segment = this.segmentRepo.findById(id).get();
+            Desk desk = new Desk();
+            segment.addDesk(desk);
+            desk.setSegment(segment);
+            this.segmentRepo.save(segment);
+            this.deskRepo.save(desk);
+        } else {
+            throw new IllegalArgumentException("Tableplan not found through provided ID");
         }
     }
 

@@ -4,6 +4,8 @@ package com.example.lanpartyapi.service;
 import com.example.lanpartyapi.dto.ChairResponse;
 import com.example.lanpartyapi.entity.Chair;
 import com.example.lanpartyapi.entity.Desk;
+import com.example.lanpartyapi.entity.Segment;
+import com.example.lanpartyapi.entity.TablePlan;
 import com.example.lanpartyapi.repository.ChairRepo;
 import com.example.lanpartyapi.repository.DeskRepo;
 import org.springframework.http.HttpStatus;
@@ -46,6 +48,25 @@ public class ChairService {
         Optional<Chair> chair = this.chairRepo.findById(id);
         if (chair.isPresent()){
             this.chairRepo.delete(chair.get());
+        }
+    }
+
+    public void createChairFromDesk(int id) {
+
+        if (this.deskRepo.findById(id).isPresent()){
+            Desk desk = this.deskRepo.findById(id).get();
+            if (desk.getChairs().size() != 2){
+                Chair chair = new Chair();
+                desk.addChair(chair);
+                chair.setDesk(desk);
+                this.deskRepo.save(desk);
+                this.chairRepo.save(chair);
+            }else {
+                throw new IllegalArgumentException("Two chairs are already connected to this desk");
+            }
+
+        } else {
+            throw new IllegalArgumentException("Tableplan not found through provided ID");
         }
     }
 }
