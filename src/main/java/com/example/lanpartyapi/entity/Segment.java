@@ -29,7 +29,7 @@ public class Segment {
 
 
     @JsonBackReference
-    @OneToMany(mappedBy = "segment", fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
+    @OneToMany(mappedBy = "segment", fetch = FetchType.LAZY, cascade = CascadeType.REMOVE)
     List<Desk> desks = new ArrayList<>();
 
     @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})

@@ -9,6 +9,7 @@ import com.example.lanpartyapi.entity.Desk;
 import com.example.lanpartyapi.entity.Segment;
 import com.example.lanpartyapi.entity.TablePlan;
 import com.example.lanpartyapi.service.AdminService;
+import com.example.lanpartyapi.service.SegmentService;
 import org.springframework.data.repository.query.Param;
 import org.springframework.web.bind.annotation.*;
 
@@ -20,26 +21,31 @@ import java.util.List;
 @RequestMapping("/api")
 public class SegmentController {
 
-    AdminService adminService;
+    SegmentService segmentService;
 
-    SegmentController(AdminService adminService) {
-        this.adminService = adminService;
+    SegmentController(SegmentService segmentService) {
+        this.segmentService = segmentService;
     }
 
     @GetMapping("/segments")
     public List<SegmentResponse> getSegments() {
-        return this.adminService.findAllSegments();
+        return this.segmentService.findAllSegments();
     }
 
 
     @GetMapping("/segmentsfromtableplan")
     public List<SegmentResponse> getSegmentsFromTablePlan(@RequestParam int id) {
-        return this.adminService.getSegmentFromTablePlan(id);
+        return this.segmentService.getSegmentFromTablePlan(id);
     }
 
     @PostMapping("/createsegment")
     public void createSegmentsFromTablePlan(@RequestParam int id){
-        this.adminService.createSegmentFromTablePlan(id);
+        this.segmentService.createSegmentFromTablePlan(id);
+    }
+
+    @DeleteMapping("/deletesegment")
+    public void deleteDesk(@RequestParam int id){
+        this.segmentService.deleteSegment(id);
     }
 
 }

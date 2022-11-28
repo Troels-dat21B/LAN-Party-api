@@ -28,7 +28,7 @@ public class TablePlan {
 
 
 
-    @OneToMany(mappedBy = "tableplan", fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
+    @OneToMany(mappedBy = "tableplan", fetch = FetchType.LAZY, cascade = CascadeType.REMOVE)
     @JsonBackReference
     public List<Segment> segments = new ArrayList<>();
 
