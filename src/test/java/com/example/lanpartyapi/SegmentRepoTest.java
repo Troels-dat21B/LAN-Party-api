@@ -47,7 +47,7 @@ public class SegmentRepoTest {
 
     @Test
     void addSegmentToTablePlan() {
-        TablePlan myTablePlan = tablePlanRepo.findByName("Bord1");
+        TablePlan myTablePlan = tablePlanRepo.findByName("Bord1").get();
         List<Segment> segmentsAfter = new ArrayList<>(segmentRepo.findAll());
         myTablePlan.setSegments(segmentsAfter);
 
