@@ -16,6 +16,8 @@ import java.time.Instant;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
 
 @Getter
 @Setter
@@ -47,7 +49,10 @@ public class JWTHandler {
         }
     }
 
-    public void decode(String jwt) {
+    public HashMap<String, String> decode(String jwt) {
+
+        HashMap<String, String> hashMap = new HashMap<>();
+
         try {
             Algorithm algorithm = Algorithm.HMAC256(System.getenv(secretEnvName));
             JWTVerifier verifier = JWT.require(algorithm)
@@ -58,9 +63,12 @@ public class JWTHandler {
 
             Claim usernameClaim = decodedJWT.getClaim("username");
             this.username = usernameClaim.asString();
+            hashMap.put("username", usernameClaim.asString());
         } catch (SignatureVerificationException e) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "JWT verification error");
         }
+
+        return hashMap;
     }
 }
 
