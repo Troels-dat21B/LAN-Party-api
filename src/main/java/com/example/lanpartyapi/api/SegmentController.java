@@ -9,7 +9,7 @@ import java.util.List;
 
 @RestController
 @CrossOrigin
-@RequestMapping("/api")
+@RequestMapping("/api/segments")
 public class SegmentController {
 
     SegmentService segmentService;
@@ -18,7 +18,7 @@ public class SegmentController {
         this.segmentService = segmentService;
     }
 
-    @GetMapping("/segments")
+    @GetMapping("/")
     public List<SegmentResponse> getSegments() {
         return this.segmentService.findAllSegments();
     }

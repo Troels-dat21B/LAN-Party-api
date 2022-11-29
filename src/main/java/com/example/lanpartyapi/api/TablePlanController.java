@@ -11,7 +11,7 @@ import java.util.List;
 
 @RestController
 @CrossOrigin
-@RequestMapping("/api")
+@RequestMapping("/api/tableplans")
 public class TablePlanController {
 
     TablePlanService tablePlanService;
@@ -20,7 +20,7 @@ public class TablePlanController {
         this.tablePlanService = tablePlanService;
     }
 
-    @GetMapping("/tableplans")
+    @GetMapping("/")
     public List<TablePlanResponse> getTablePlans() {
 
         return this.tablePlanService.findAllTablePlans();

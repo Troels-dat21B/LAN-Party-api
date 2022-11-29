@@ -8,7 +8,7 @@ import java.util.List;
 
 @RestController
 @CrossOrigin
-@RequestMapping("/api")
+@RequestMapping("/api/desks")
 public class DeskController {
 
     DeskService deskService;
@@ -17,7 +17,7 @@ public class DeskController {
         this.deskService = deskService;
     }
 
-    @GetMapping("/desks")
+    @GetMapping("/")
     public Iterable<DeskResponse> getDesks() {
         return this.deskService.findAllDesks();
     }

@@ -11,7 +11,7 @@ import java.util.List;
 
 @RestController
 @CrossOrigin
-@RequestMapping("/api")
+@RequestMapping("/api/chairs")
 public class ChairController {
 
     ChairService chairService;
@@ -20,7 +20,7 @@ public class ChairController {
         this.chairService = chairService;
     }
 
-    @GetMapping("/chairs")
+    @GetMapping("/")
     public Iterable<ChairResponse> getTablePlan() {
         return this.chairService.findAllChairs();
     }
