@@ -22,8 +22,8 @@ public class ChairRepoTest {
         Chair chair = new Chair();
         Chair chair2 = new Chair();
         chair2.set_reserved(true);
-        this.cR.save(chair);
-        this.cR.save(chair2);
+        cR.save(chair);
+        cR.save(chair2);
     }
 
 
