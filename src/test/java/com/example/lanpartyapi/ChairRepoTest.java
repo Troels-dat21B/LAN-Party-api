@@ -15,15 +15,15 @@ import java.util.List;
 @DataJpaTest
 public class ChairRepoTest {
     @Autowired
-    public static ChairRepo cR;
+    public ChairRepo cR;
 
     @BeforeEach
     void chairSetup(){
         Chair chair = new Chair();
         Chair chair2 = new Chair();
         chair2.set_reserved(true);
-        cR.save(chair);
-        cR.save(chair2);
+        this.cR.save(chair);
+        this.cR.save(chair2);
     }
 
 
