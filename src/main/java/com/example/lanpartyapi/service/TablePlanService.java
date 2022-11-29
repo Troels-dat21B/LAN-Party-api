@@ -48,8 +48,7 @@ public class TablePlanService {
             this.tablePlanRepo.delete(tablePlan.get());
         }
     }
-/*
-    public List<List<Chair>> getTablePlanInfo(int id) {
+    /*  public List<List<Chair>> getTablePlanInfo(int id) {
         List<List> finalList = new ArrayList<>();
         TablePlan found = tablePlanRepo.findById(id).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Table Plan not found"));
 
