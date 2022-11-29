@@ -50,7 +50,7 @@ public class TablePlanService {
 
     public List<Segment> getTablePlanInfo(int id) {
         TablePlan found = tablePlanRepo.findById(id).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Table Plan not found"));
-        return this.segmentRepo.findSegmentsBytableplan_id(found.getTableplan_id());
+        return null;//this.segmentRepo.findSegmentsBytableplan_id(found.getTableplan_id());
 
     }
 

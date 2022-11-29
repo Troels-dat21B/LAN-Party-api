@@ -9,6 +9,4 @@ import java.util.List;
 
 
 public interface SegmentRepo extends JpaRepository<Segment, Integer> {
-
-    List<Segment> findSegmentsBytableplan_id(int tableplan_id);
 }
