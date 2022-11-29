@@ -25,13 +25,11 @@ public class Desk {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     int desk_id;
-    @JsonBackReference
     @OneToMany(mappedBy = "desk", fetch = FetchType.LAZY, cascade = CascadeType.REMOVE)
     List<Chair> chairs = new ArrayList<>();
 
 
     @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
-    @JsonManagedReference
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "segment_id")
     private Segment segment;

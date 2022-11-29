@@ -39,10 +39,10 @@ public class TablePlanController {
         this.tablePlanService.deleteTablePlan(id);
     }
 
-    @GetMapping("/tableplaninfo")
+/*    @GetMapping("/tableplaninfo")
     public List<Segment> tablePlanInfo(@RequestParam int id){
         return tablePlanService.getTablePlanInfo(id);
-    }
+    }*/
 
 
 

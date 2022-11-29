@@ -1,7 +1,6 @@
 package com.example.lanpartyapi.dto;
 
 import com.example.lanpartyapi.entity.Segment;
-import com.example.lanpartyapi.entity.TablePlan;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;

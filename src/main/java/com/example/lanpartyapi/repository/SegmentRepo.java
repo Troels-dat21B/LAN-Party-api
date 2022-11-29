@@ -1,12 +1,13 @@
 package com.example.lanpartyapi.repository;
 
+import com.example.lanpartyapi.entity.Chair;
 import com.example.lanpartyapi.entity.Segment;
 import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.data.jpa.repository.Query;
-import org.springframework.data.repository.query.Param;
 
 import java.util.List;
 
 
 public interface SegmentRepo extends JpaRepository<Segment, Integer> {
+
+    //List<List<Chair>> findSegmentsByTableplan_id(int tableplan_id);
 }
