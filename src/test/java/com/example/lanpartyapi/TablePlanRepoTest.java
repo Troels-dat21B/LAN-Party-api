@@ -52,7 +52,7 @@ public class TablePlanRepoTest {
 
     @Test
     void findTablePlanByName(){
-        TablePlan tablePlans = tablePlanRepo.findByName("Bordplan1");
+        TablePlan tablePlans = tablePlanRepo.findByName("Bordplan1").get();
 
         assertEquals("Bordplan1", tablePlans.getName());
     }
