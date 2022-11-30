@@ -22,9 +22,9 @@ public class LanUserController {
     public LanUserResponse findUserUsername(@RequestBody HashMap<String, String> payload) {
 
         JWTHandler jwtHandler = new JWTHandler();
-        var hashMap = jwtHandler.decode(payload.get("accessToken"));
+        var jwtPayload = jwtHandler.decode(payload.get("accessToken"));
 
-        return lanUserService.findByUsername(hashMap.get("username"));
+        return lanUserService.findByUsername(jwtPayload.getUsername());
 
     }
 

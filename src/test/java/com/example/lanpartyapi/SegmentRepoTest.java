@@ -4,6 +4,7 @@ import com.example.lanpartyapi.entity.Segment;
 import com.example.lanpartyapi.entity.TablePlan;
 import com.example.lanpartyapi.repository.SegmentRepo;
 import com.example.lanpartyapi.repository.TablePlanRepo;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,13 +18,16 @@ import java.util.List;
 @DataJpaTest
 public class SegmentRepoTest {
 
-    @Autowired
-    SegmentRepo segmentRepo;
-    @Autowired
-    TablePlanRepo tablePlanRepo;
+    private static SegmentRepo segmentRepo;
+    private static TablePlanRepo tablePlanRepo;
 
-    @BeforeEach
-    void setUpSegment() {
+    @BeforeAll
+    static void setUpSegment(@Autowired SegmentRepo segmentRepository, @Autowired TablePlanRepo tablePlanRepository) {
+        segmentRepo = segmentRepository;
+        segmentRepo.deleteAll();
+        tablePlanRepo = tablePlanRepository;
+        tablePlanRepo.deleteAll();
+
         Segment newSegment = new Segment();
         Segment newSegment2 = new Segment();
         Segment newSegment3 = new Segment();

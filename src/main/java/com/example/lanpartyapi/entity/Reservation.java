@@ -13,6 +13,19 @@ public class Reservation {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
-    @ManyToOne
+    @JoinColumn(name = "lan_user_id")
+    @ManyToOne(fetch = FetchType.LAZY)
     private LanUser lanUser;
+    @JoinColumn(name = "chair_id")
+    @OneToOne
+    private Chair chair;
+
+    public String getOwnerUsername() {
+        String username = "";
+        if (this.lanUser != null) {
+            username = this.lanUser.getLanUserName();
+        }
+
+        return username;
+    }
 }

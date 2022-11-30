@@ -11,6 +11,7 @@ import com.example.lanpartyapi.repository.ChairRepo;
 import com.example.lanpartyapi.repository.DeskRepo;
 import com.example.lanpartyapi.repository.SegmentRepo;
 import com.example.lanpartyapi.repository.TablePlanRepo;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,18 +21,29 @@ import java.util.List;
 
 @DataJpaTest
 public class FullRepositoryTest {
-    @Autowired
-    ChairRepo chairRepo;
-    @Autowired
-    DeskRepo deskRepo;
-    @Autowired
-    SegmentRepo segmentRepo;
-    @Autowired
-    TablePlanRepo tablePlanRepo;
+
+    private static ChairRepo chairRepo;
+    private static DeskRepo deskRepo;
+    private static SegmentRepo segmentRepo;
+    private static TablePlanRepo tablePlanRepo;
 
 
-    @BeforeEach
-    void setupBeforeTests() {
+    @BeforeAll
+    static void setupBeforeTests(
+            @Autowired ChairRepo chairRepository,
+            @Autowired DeskRepo deskRepository,
+            @Autowired SegmentRepo segmentRepository,
+            @Autowired TablePlanRepo tablePlanRepository
+    ) {
+        chairRepo = chairRepository;
+        chairRepo.deleteAll();
+        deskRepo = deskRepository;
+        deskRepo.deleteAll();
+        segmentRepo = segmentRepository;
+        segmentRepo.deleteAll();
+        tablePlanRepo = tablePlanRepository;
+        tablePlanRepo.deleteAll();
+
         TablePlan tablePlan = new TablePlan();
         tablePlan.setName("Test tableplan");
 
@@ -86,45 +98,45 @@ public class FullRepositoryTest {
         desk3.setSegment(segment2);
         desk4.setSegment(segment2);
 
-        this.segmentRepo.save(segment);
-        this.segmentRepo.save(segment2);
-        this.tablePlanRepo.save(tablePlan);
+        segmentRepo.save(segment);
+        segmentRepo.save(segment2);
+        tablePlanRepo.save(tablePlan);
 
-        this.deskRepo.save(desk);
-        this.deskRepo.save(desk2);
-        this.deskRepo.save(desk3);
-        this.deskRepo.save(desk4);
+        deskRepo.save(desk);
+        deskRepo.save(desk2);
+        deskRepo.save(desk3);
+        deskRepo.save(desk4);
 
-        this.chairRepo.save(chair);
-        this.chairRepo.save(chair2);
-        this.chairRepo.save(chair3);
-        this.chairRepo.save(chair4);
-        this.chairRepo.save(chair5);
-        this.chairRepo.save(chair6);
-        this.chairRepo.save(chair7);
-        this.chairRepo.save(chair8);
+        chairRepo.save(chair);
+        chairRepo.save(chair2);
+        chairRepo.save(chair3);
+        chairRepo.save(chair4);
+        chairRepo.save(chair5);
+        chairRepo.save(chair6);
+        chairRepo.save(chair7);
+        chairRepo.save(chair8);
     }
 
     @Test
     void testConnectionBetweenSegmentAndTablePlan() {
-        List<TablePlan> tableList = this.tablePlanRepo.findAll();
-        List<Segment> segmentList = this.segmentRepo.findAll();
+        List<TablePlan> tableList = tablePlanRepo.findAll();
+        List<Segment> segmentList = segmentRepo.findAll();
 
         assertEquals(segmentList.get(0).getTableplan().getTableplan_id(), tableList.get(0).getTableplan_id());
     }
 
     @Test
     void testConnectionBetweenDeskAndSegment() {
-        List<Segment> segmentList = this.segmentRepo.findAll();
-        List<Desk> deskList = this.deskRepo.findAll();
+        List<Segment> segmentList = segmentRepo.findAll();
+        List<Desk> deskList = deskRepo.findAll();
 
         assertEquals(deskList.get(0).getSegment().getSegment_id(), segmentList.get(0).getSegment_id());
     }
 
     @Test
     void testConnectionBetweenChairAndDesk() {
-        List<Desk> deskList = this.deskRepo.findAll();
-        List<Chair> chairList = this.chairRepo.findAll();
+        List<Desk> deskList = deskRepo.findAll();
+        List<Chair> chairList = chairRepo.findAll();
 
         assertEquals(chairList.get(0).getDesk().getDesk_id(), deskList.get(0).getDesk_id());
     }

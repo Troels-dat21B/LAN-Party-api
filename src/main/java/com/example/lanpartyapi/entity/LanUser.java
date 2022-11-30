@@ -12,7 +12,7 @@ import java.util.List;
 @AllArgsConstructor
 @Getter
 @Setter
-@Table(schema = "lan_user")
+@Table(name = "lan_user")
 @Entity
 public class LanUser {
 
@@ -25,7 +25,6 @@ public class LanUser {
 
     @Enumerated(EnumType.STRING)
     private LanUserType userType;
-    @JoinColumn(name = "reservation_id")
-    @OneToMany(mappedBy = "lan_user", fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "lanUser", fetch = FetchType.LAZY)
     private List<Reservation> reservations;
 }

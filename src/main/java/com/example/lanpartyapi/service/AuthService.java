@@ -1,13 +1,16 @@
 package com.example.lanpartyapi.service;
 
+import com.example.lanpartyapi.dto.JWTPayload;
 import com.example.lanpartyapi.dto.LanUserRequest;
 import com.example.lanpartyapi.entity.LanUser;
+import com.example.lanpartyapi.entity.LanUserType;
 import com.example.lanpartyapi.repository.LanUserRepository;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.crypto.bcrypt.BCrypt;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
+import java.util.HashMap;
 import java.util.Optional;
 
 @Service
@@ -20,7 +23,6 @@ public class AuthService {
     }
 
     public String signIn(LanUserRequest lanUserRequest) {
-        System.out.println(lanUserRequest.getUsername());
         String token;
 
         Optional<LanUser> lanUserOptional = this.lanUserRepository.findById(lanUserRequest.getUsername());
@@ -42,8 +44,20 @@ public class AuthService {
         return token;
     }
 
-    public void authorize(String accessToken) {
+    public JWTPayload authorize(String bearerToken) {
+        return this.authorize(bearerToken, LanUserType.USER);
+    }
+
+    public JWTPayload authorize(String bearerToken, LanUserType requiredLanUserType) {
+        return this.authorization(bearerToken, requiredLanUserType);
+    }
+
+    //Todo: implement usertype authorization
+    private JWTPayload authorization(String bearerToken, LanUserType requiredLanUserType) {
+        bearerToken = bearerToken.replace("Bearer ", "");
+
         JWTHandler jwtHandler = new JWTHandler();
-        jwtHandler.decode(accessToken);
+
+        return jwtHandler.decode(bearerToken);
     }
 }
