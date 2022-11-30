@@ -98,9 +98,10 @@ public class FullRepositoryTest {
         desk3.setSegment(segment2);
         desk4.setSegment(segment2);
 
+        tablePlanRepo.save(tablePlan);
         segmentRepo.save(segment);
         segmentRepo.save(segment2);
-        tablePlanRepo.save(tablePlan);
+
 
         deskRepo.save(desk);
         deskRepo.save(desk2);
