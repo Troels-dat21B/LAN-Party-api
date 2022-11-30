@@ -3,6 +3,7 @@ import com.example.lanpartyapi.entity.Segment;
 import com.example.lanpartyapi.entity.TablePlan;
 import com.example.lanpartyapi.repository.SegmentRepo;
 import com.example.lanpartyapi.repository.TablePlanRepo;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,14 +16,15 @@ import java.util.List;
 @DataJpaTest
 public class TablePlanRepoTest {
 
-    @Autowired
-    TablePlanRepo tablePlanRepo;
-    @Autowired
-    SegmentRepo segmentRepo;
+    private static TablePlanRepo tablePlanRepo;
+    private static SegmentRepo segmentRepo;
 
-
-    @BeforeEach
-    void setUpTablePlan(){
+    @BeforeAll
+    static void setUpTablePlan(@Autowired TablePlanRepo tablePlanRepository, @Autowired SegmentRepo segmentRepository){
+        tablePlanRepo = tablePlanRepository;
+        tablePlanRepo.deleteAll();
+        segmentRepo = segmentRepository;
+        segmentRepo.deleteAll();
 
         Segment newSegment = new Segment();
         Segment newSegment2 = new Segment();

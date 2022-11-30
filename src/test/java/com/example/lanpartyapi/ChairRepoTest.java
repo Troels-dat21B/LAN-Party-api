@@ -5,6 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import com.example.lanpartyapi.entity.Chair;
 import com.example.lanpartyapi.entity.Desk;
 import com.example.lanpartyapi.repository.ChairRepo;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,22 +15,25 @@ import java.util.List;
 
 @DataJpaTest
 public class ChairRepoTest {
-    @Autowired
-    public ChairRepo cR;
 
-    @BeforeEach
-    void chairSetup(){
+    public static ChairRepo cR;
+
+    @BeforeAll
+    static void chairSetup(@Autowired ChairRepo chairRepo){
+        cR = chairRepo;
+        cR.deleteAll();
+
         Chair chair = new Chair();
         Chair chair2 = new Chair();
         chair2.set_reserved(true);
-        this.cR.save(chair);
-        this.cR.save(chair2);
+        cR.save(chair);
+        cR.save(chair2);
     }
 
 
     @Test
     void testForChairs(){
-        List<Chair> chairs = this.cR.findAll();
+        List<Chair> chairs = cR.findAll();
         assertEquals(1, chairs.get(0).getChair_id());
         assertEquals(2, chairs.get(1).getChair_id());
         assertEquals(2, chairs.size());

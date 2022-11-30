@@ -6,12 +6,14 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.util.List;
 
-@Getter
-@Setter
-@Entity
 @NoArgsConstructor
 @AllArgsConstructor
+@Getter
+@Setter
+@Table(name = "lan_user")
+@Entity
 public class LanUser {
 
     @Id
@@ -23,4 +25,6 @@ public class LanUser {
 
     @Enumerated(EnumType.STRING)
     private LanUserType userType;
+    @OneToMany(mappedBy = "lanUser", fetch = FetchType.LAZY)
+    private List<Reservation> reservations;
 }

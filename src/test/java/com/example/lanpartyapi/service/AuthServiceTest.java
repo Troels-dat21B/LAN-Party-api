@@ -28,7 +28,6 @@ class AuthServiceTest {
     @BeforeAll
     public static void setup(@Autowired LanUserRepository userRepository) {
         userRepositoryStatic = userRepository;
-        userRepositoryStatic.deleteAll();
 
         var salt = BCrypt.gensalt(12);
 

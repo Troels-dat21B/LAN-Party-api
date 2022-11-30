@@ -7,6 +7,7 @@ import com.auth0.jwt.exceptions.SignatureVerificationException;
 import com.auth0.jwt.interfaces.Claim;
 import com.auth0.jwt.interfaces.DecodedJWT;
 import com.auth0.jwt.interfaces.JWTVerifier;
+import com.example.lanpartyapi.dto.JWTPayload;
 import lombok.Getter;
 import lombok.Setter;
 import org.springframework.http.HttpStatus;
@@ -49,7 +50,7 @@ public class JWTHandler {
         }
     }
 
-    public HashMap<String, String> decode(String jwt) {
+    public JWTPayload decode(String jwt) {
 
         HashMap<String, String> hashMap = new HashMap<>();
 
@@ -68,7 +69,7 @@ public class JWTHandler {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "JWT verification error");
         }
 
-        return hashMap;
+        return new JWTPayload(hashMap);
     }
 }
 
