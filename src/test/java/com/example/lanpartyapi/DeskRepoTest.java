@@ -13,7 +13,10 @@ import java.util.List;
 
 @DataJpaTest
 public class DeskRepoTest {
+    static int deskId1;
+    static int deskId2;
 
+    static int deskSize;
     public static DeskRepo tR;
 
     @BeforeAll
@@ -23,8 +26,12 @@ public class DeskRepoTest {
 
         Desk desk = new Desk();
         Desk desk2 = new Desk();
-        tR.save(desk);
-        tR.save(desk2);
+        deskId1 = tR.save(desk).getDesk_id();
+        deskSize++;
+        deskId2 = tR.save(desk2).getDesk_id();
+        deskSize++;
+
+
     }
 
     @Test
@@ -33,9 +40,9 @@ public class DeskRepoTest {
 
         desks.forEach(desk -> System.out.println(desk.getDesk_id()));
 
-        assertEquals(1, desks.get(0).getDesk_id());
-        assertEquals(2, desks.get(1).getDesk_id());
-        assertEquals(2, desks.size());
+        assertEquals(deskId1, desks.get(0).getDesk_id());
+        assertEquals(deskId2, desks.get(1).getDesk_id());
+        assertEquals(deskSize, desks.size());
     }
 
 }
