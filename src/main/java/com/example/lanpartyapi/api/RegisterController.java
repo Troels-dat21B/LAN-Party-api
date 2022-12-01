@@ -2,7 +2,10 @@ package com.example.lanpartyapi.api;
 
 import com.example.lanpartyapi.dto.LanUserRequest;
 import com.example.lanpartyapi.service.RegisterService;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.HashMap;
 
 @RestController
 @CrossOrigin
@@ -16,8 +19,8 @@ public class RegisterController {
     }
 
     @PostMapping()
-    public void registerUser(@RequestBody LanUserRequest body){
-        this.registerService.saveLanUser(body);
+    public ResponseEntity<HashMap<String, String>> registerUser(@RequestBody LanUserRequest body){
+        return this.registerService.saveLanUser(body);
     }
 
 }

@@ -8,8 +8,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.bcrypt.BCrypt;
 import org.springframework.stereotype.Service;
-import org.springframework.web.server.ResponseStatusException;
 
+import java.util.HashMap;
 import java.util.Optional;
 
 @Service
@@ -22,12 +22,15 @@ public class RegisterService {
         this.lanUserRepository = lanUserRepository;
     }
 
-    public ResponseEntity<String> saveLanUser(LanUserRequest body) {
+    public ResponseEntity<HashMap<String, String>> saveLanUser(LanUserRequest body) {
 
         Optional<LanUser> test = lanUserRepository.findById(body.getUsername());
-
+        HashMap<String, String> responeHashmap = new HashMap<String, String>();
         if (test.isPresent()) {
-            return new ResponseEntity<>("Brugernavn allerede taget", HttpStatus.FORBIDDEN);
+            responeHashmap.put("response", "Brugernavn allerede taget");
+            ResponseEntity<HashMap<String, String>> myresE = new ResponseEntity<>(responeHashmap, HttpStatus.FORBIDDEN);
+            System.out.println(myresE);
+            return myresE;
         } else {
             String name = body.getUsername();
             var salt = BCrypt.gensalt(12);
@@ -40,7 +43,11 @@ public class RegisterService {
 
             lanUserRepository.save(newUser);
 
-            return new ResponseEntity<>("Du er nu oprette!", HttpStatus.OK);
+            responeHashmap.put("response", "Du er nu oprette!");
+            ResponseEntity<HashMap<String, String>> myresE2 = new ResponseEntity<>(responeHashmap, HttpStatus.OK);
+            System.out.println(myresE2);
+            
+            return myresE2;
         }
     }
 }
