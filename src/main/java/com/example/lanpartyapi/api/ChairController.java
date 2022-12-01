@@ -39,13 +39,13 @@ public class ChairController {
     }
 
     @GetMapping("/segment/{segmentId}")
-    public List<ChairResponse> findBySegment(
+    public List<ChairResponse> findUnreservedBySegment(
             @PathVariable("segmentId") int segmentId,
             @RequestHeader("Authorization") String authHeader
     ) {
         this.authservice.authorize(authHeader);
 
-        return this.chairService.findBySegment(segmentId);
+        return this.chairService.findUnreservedBySegment(segmentId);
     }
 
     @DeleteMapping("/deletechair")
