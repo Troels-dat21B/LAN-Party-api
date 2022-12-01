@@ -9,7 +9,6 @@ import org.springframework.security.crypto.bcrypt.BCrypt;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
-import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -22,12 +21,13 @@ public class RegisterService {
         this.lanUserRepository = lanUserRepository;
     }
 
-    public void saveLanUser(LanUserRequest body) {
+    public String saveLanUser(LanUserRequest body) {
 
        Optional<LanUser> test = lanUserRepository.findById(body.getUsername());
 
        if (test.isPresent()){
-           throw new ResponseStatusException(HttpStatus.FORBIDDEN, "Name already taken!");
+
+           return new ResponseStatusException(HttpStatus.FORBIDDEN, "Brugernavn eksistere allerede! ").getMessage();
        }else{
            String name = body.getUsername();
            var salt = BCrypt.gensalt(12);
@@ -39,7 +39,9 @@ public class RegisterService {
            newUser.setUserType(LanUserType.USER);
 
            lanUserRepository.save(newUser);
-       }
 
+           return "Bruger Oprettet!";
+
+       }
     }
 }
