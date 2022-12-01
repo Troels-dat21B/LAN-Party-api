@@ -15,11 +15,10 @@ import java.util.Optional;
 public class RegisterService {
 
     LanUserRepository lanUserRepository;
-    LanUser lanUser;
 
-    RegisterService(LanUserRepository lanUserRepository, LanUser lanUser){
+    RegisterService(LanUserRepository lanUserRepository){
         this.lanUserRepository = lanUserRepository;
-        this.lanUser = lanUser;
+
     }
 
     public void saveLanUser(LanUserRequest body) {
