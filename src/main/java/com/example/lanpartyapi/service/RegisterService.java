@@ -5,6 +5,7 @@ import com.example.lanpartyapi.entity.LanUser;
 import com.example.lanpartyapi.entity.LanUserType;
 import com.example.lanpartyapi.repository.LanUserRepository;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.crypto.bcrypt.BCrypt;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
@@ -15,11 +16,9 @@ import java.util.Optional;
 public class RegisterService {
 
     LanUserRepository lanUserRepository;
-    LanUser lanUser;
 
-    RegisterService(LanUserRepository lanUserRepository, LanUser lanUser){
+    RegisterService(LanUserRepository lanUserRepository){
         this.lanUserRepository = lanUserRepository;
-        this.lanUser = lanUser;
     }
 
     public void saveLanUser(LanUserRequest body) {
@@ -30,11 +29,12 @@ public class RegisterService {
            throw new ResponseStatusException(HttpStatus.FORBIDDEN, "Name already taken!");
        }else{
            String name = body.getUsername();
-           String password = body.getPassword();
+           var salt = BCrypt.gensalt(12);
+           var passwordHash = BCrypt.hashpw(body.getPassword(), salt);
 
            LanUser newUser = new LanUser();
            newUser.setLanUserName(name);
-           newUser.setUserPassword(password);
+           newUser.setUserPassword(passwordHash);
            newUser.setUserType(LanUserType.USER);
 
            lanUserRepository.save(newUser);
