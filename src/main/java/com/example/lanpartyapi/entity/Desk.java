@@ -38,8 +38,7 @@ public class Desk {
         this.chairs.add(chair);
     }
 
-
-
-
-
+    public int getSegmentId() {
+        return this.segment.getSegment_id();
+    }
 }

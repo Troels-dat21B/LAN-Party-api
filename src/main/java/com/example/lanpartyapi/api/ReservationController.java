@@ -28,6 +28,7 @@ public class ReservationController {
         this.reservationService = reservationService;
     }
 
+    //Uses old method for authentication
     @GetMapping
     public List<Reservation> getUserReservation(@RequestBody HashMap<String, String> body) {
         var accessToken = body.get("accessToken");
