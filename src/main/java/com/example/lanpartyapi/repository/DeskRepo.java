@@ -7,4 +7,6 @@ import java.util.Optional;
 
 
 public interface DeskRepo extends JpaRepository<Desk, Integer> {
+
+
 }

@@ -1,10 +1,13 @@
 package com.example.lanpartyapi.api;
 
 import com.example.lanpartyapi.dto.*;
+import com.example.lanpartyapi.service.AuthService;
 import com.example.lanpartyapi.service.ChairService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import com.example.lanpartyapi.service.AuthService;
 
 import java.util.List;
 
@@ -15,9 +18,14 @@ import java.util.List;
 public class ChairController {
 
     ChairService chairService;
+    private AuthService authservice;
 
-    ChairController(ChairService chairService) {
+    ChairController(
+            ChairService chairService,
+            AuthService authservice
+    ) {
         this.chairService = chairService;
+        this.authservice = authservice;
     }
 
     @GetMapping("/")
@@ -28,6 +36,16 @@ public class ChairController {
     @GetMapping("/chairsFromDesk")
     public List<ChairResponse> getChairsFromDesk(@RequestParam int id) {
         return this.chairService.getChairsFromDesk(id);
+    }
+
+    @GetMapping("/segment/{segmentId}")
+    public List<ChairResponse> findBySegment(
+            @PathVariable("segmentId") int segmentId,
+            @RequestHeader("Authorization") String authHeader
+    ) {
+        this.authservice.authorize(authHeader);
+
+        return this.chairService.findBySegment(segmentId);
     }
 
     @DeleteMapping("/deletechair")

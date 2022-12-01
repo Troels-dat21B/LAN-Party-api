@@ -45,24 +45,30 @@ public class ChairService {
         //    found.add(new ChairResponse(chairs.get(i)));
     }
 
+    public List<ChairResponse> findBySegment(int segmentId) {
+        var chairs = this.chairRepo.findBySegment(segmentId);
+
+        return chairs.stream().map(ChairResponse::new).toList();
+    }
+
     public void deleteChair(int id) {
         Optional<Chair> chair = this.chairRepo.findById(id);
-        if (chair.isPresent()){
+        if (chair.isPresent()) {
             this.chairRepo.delete(chair.get());
         }
     }
 
     public void createChairFromDesk(int id) {
 
-        if (this.deskRepo.findById(id).isPresent()){
+        if (this.deskRepo.findById(id).isPresent()) {
             Desk desk = this.deskRepo.findById(id).get();
-            if (desk.getChairs().size() != 2){
+            if (desk.getChairs().size() != 2) {
                 Chair chair = new Chair();
                 desk.addChair(chair);
                 chair.setDesk(desk);
                 this.deskRepo.save(desk);
                 this.chairRepo.save(chair);
-            }else {
+            } else {
                 throw new IllegalArgumentException("Two chairs are already connected to this desk");
             }
 
@@ -74,8 +80,8 @@ public class ChairService {
 
     public void updateChair(ChairRequest body, int id) {
 
-        Chair chair = chairRepo.findById(id).orElseThrow(()-> new ResponseStatusException(HttpStatus.BAD_REQUEST, "Chair not found"));
-        if(body.getId() != chair.getChair_id()){
+        Chair chair = chairRepo.findById(id).orElseThrow(() -> new ResponseStatusException(HttpStatus.BAD_REQUEST, "Chair not found"));
+        if (body.getId() != chair.getChair_id()) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Cannot change this chair");
         }
         chair.setChair_id(body.getId());
@@ -84,6 +90,7 @@ public class ChairService {
 
         chairRepo.save(chair);
     }
+
     private void updateChairState(Chair chair) {
         chair.set_reserved(!chair.is_reserved());
     }
