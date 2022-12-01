@@ -22,6 +22,7 @@ import java.util.Map;
 
 @Getter
 @Setter
+//Modificeret fra obligatorisk projekt af Coderbois. Projektnavn fra obligatorisk opgave er Adventure-Party.
 public class JWTHandler {
 
     private static final String secretEnvName = "JWT_SECRET";
