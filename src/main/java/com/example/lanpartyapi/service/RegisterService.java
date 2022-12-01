@@ -17,6 +17,7 @@ public class RegisterService {
 
     LanUserRepository lanUserRepository;
 
+
     RegisterService(LanUserRepository lanUserRepository){
         this.lanUserRepository = lanUserRepository;
     }
