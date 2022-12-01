@@ -51,6 +51,12 @@ public class ChairService {
         return chairs.stream().map(ChairResponse::new).toList();
     }
 
+    public List<ChairResponse> findUnreservedBySegment(int segmentId) {
+        var chairs = this.findBySegment(segmentId);
+
+        return chairs.stream().filter(chairResponse -> !chairResponse.is_reserved()).toList();
+    }
+
     public void deleteChair(int id) {
         Optional<Chair> chair = this.chairRepo.findById(id);
         if (chair.isPresent()) {
