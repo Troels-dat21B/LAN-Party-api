@@ -5,6 +5,7 @@ import com.example.lanpartyapi.entity.LanUser;
 import com.example.lanpartyapi.entity.LanUserType;
 import com.example.lanpartyapi.repository.LanUserRepository;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.bcrypt.BCrypt;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
@@ -17,33 +18,29 @@ public class RegisterService {
     LanUserRepository lanUserRepository;
 
 
-    RegisterService(LanUserRepository lanUserRepository){
+    RegisterService(LanUserRepository lanUserRepository) {
         this.lanUserRepository = lanUserRepository;
     }
 
-    public String saveLanUser(LanUserRequest body) {
+    public ResponseEntity<String> saveLanUser(LanUserRequest body) {
 
-       Optional<LanUser> test = lanUserRepository.findById(body.getUsername());
-       String message;
+        Optional<LanUser> test = lanUserRepository.findById(body.getUsername());
 
-       if (test.isPresent()){
-           message = new ResponseStatusException(HttpStatus.FORBIDDEN, "Brugernavn eksistere allerede! ").getMessage();
-            throw new ResponseStatusException(HttpStatus.FORBIDDEN, "Brugernavn eksistere allerede! ");
-       }else{
-           String name = body.getUsername();
-           var salt = BCrypt.gensalt(12);
-           var passwordHash = BCrypt.hashpw(body.getPassword(), salt);
+        if (test.isPresent()) {
+            return new ResponseEntity<>("Brugernavn allerede taget", HttpStatus.FORBIDDEN);
+        } else {
+            String name = body.getUsername();
+            var salt = BCrypt.gensalt(12);
+            var passwordHash = BCrypt.hashpw(body.getPassword(), salt);
 
-           LanUser newUser = new LanUser();
-           newUser.setLanUserName(name);
-           newUser.setUserPassword(passwordHash);
-           newUser.setUserType(LanUserType.USER);
+            LanUser newUser = new LanUser();
+            newUser.setLanUserName(name);
+            newUser.setUserPassword(passwordHash);
+            newUser.setUserType(LanUserType.USER);
 
-           lanUserRepository.save(newUser);
+            lanUserRepository.save(newUser);
 
-           message = "Bruger Oprettet!";
-
-       }
-       return message;
+            return new ResponseEntity<>("Du er nu oprette!", HttpStatus.OK);
+        }
     }
 }
