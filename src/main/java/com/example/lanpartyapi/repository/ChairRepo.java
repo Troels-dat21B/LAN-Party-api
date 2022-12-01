@@ -10,7 +10,7 @@ public interface ChairRepo extends JpaRepository<Chair, Integer> {
 
     //Will find all the chairs that belong to a desk in a given segment
     @Query(
-            value = "SELECT chair_id, desk.desk_id FROM chair INNER JOIN " +
+            value = "SELECT chair_id, desk.desk_id, is_reserved FROM chair INNER JOIN " +
                     "(SELECT desk.segment_id, desk.desk_id FROM desk INNER  JOIN segment s on " +
                     "desk.segment_id = s.segment_id WHERE s.segment_id = ?1) as desk " +
                     "on chair.desk_id = desk.desk_id",
