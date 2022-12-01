@@ -24,10 +24,11 @@ public class RegisterService {
     public String saveLanUser(LanUserRequest body) {
 
        Optional<LanUser> test = lanUserRepository.findById(body.getUsername());
+       String message;
 
        if (test.isPresent()){
-
-           return new ResponseStatusException(HttpStatus.FORBIDDEN, "Brugernavn eksistere allerede! ").getMessage();
+           message = new ResponseStatusException(HttpStatus.FORBIDDEN, "Brugernavn eksistere allerede! ").getMessage();
+            throw new ResponseStatusException(HttpStatus.FORBIDDEN, "Brugernavn eksistere allerede! ");
        }else{
            String name = body.getUsername();
            var salt = BCrypt.gensalt(12);
@@ -40,8 +41,9 @@ public class RegisterService {
 
            lanUserRepository.save(newUser);
 
-           return "Bruger Oprettet!";
+           message = "Bruger Oprettet!";
 
        }
+       return message;
     }
 }
