@@ -10,7 +10,6 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
-
 import java.util.List;
 
 @DataJpaTest
@@ -35,7 +34,6 @@ public class ChairRepoTest {
         chairInt2 = cR.save(chair2).getChair_id();
     }
 
-
     @Test
     void testForChairs(){
         List<Chair> chairs = cR.findAll();
@@ -44,6 +42,4 @@ public class ChairRepoTest {
         assertEquals(chairCounter, chairs.size());
         assertTrue(chairs.get(1).is_reserved());
     }
-
-
 }

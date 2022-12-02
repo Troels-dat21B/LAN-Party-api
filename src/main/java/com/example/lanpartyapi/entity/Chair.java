@@ -34,5 +34,7 @@ public class Chair {
         this.desk = desk;
     }
 
-
+    public int getDeskId() {
+        return this.desk.getDesk_id();
+    }
 }

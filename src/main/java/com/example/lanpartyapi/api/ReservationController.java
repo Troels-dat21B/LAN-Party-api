@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @CrossOrigin
@@ -28,6 +29,7 @@ public class ReservationController {
         this.reservationService = reservationService;
     }
 
+    //Uses old method for authentication
     @GetMapping
     public List<Reservation> getUserReservation(@RequestBody HashMap<String, String> body) {
         var accessToken = body.get("accessToken");
@@ -37,7 +39,7 @@ public class ReservationController {
     }
 
     @PostMapping
-    public ResponseEntity<String> create(
+    public ResponseEntity<HashMap<String, String>> create(
             @RequestHeader("Authorization") String auth,
             @RequestBody ReservationRequest reservationRequest
     ) {
@@ -45,6 +47,9 @@ public class ReservationController {
 
         this.reservationService.create(payload.getUsername(), reservationRequest.getChairId());
 
-        return new ResponseEntity<>("Successfully created new reservation", HttpStatus.OK);
+        return new ResponseEntity<>(
+                new HashMap<>(Map.of("message", "Successfully created new reservation")),
+                HttpStatus.OK
+        );
     }
 }
