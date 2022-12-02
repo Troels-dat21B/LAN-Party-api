@@ -46,7 +46,7 @@ public class RegisterService {
             responeHashmap.put("response", "Du er nu oprette!");
             ResponseEntity<HashMap<String, String>> myresE2 = new ResponseEntity<>(responeHashmap, HttpStatus.OK);
             System.out.println(myresE2);
-            
+
             return myresE2;
         }
     }

@@ -16,7 +16,10 @@ import java.util.List;
 @DataJpaTest
 public class ChairRepoTest {
 
+    static int chairInt1;
+    static int chairInt2;
     public static ChairRepo cR;
+    static int chairCounter;
 
     @BeforeAll
     static void chairSetup(@Autowired ChairRepo chairRepo){
@@ -24,19 +27,21 @@ public class ChairRepoTest {
         cR.deleteAll();
 
         Chair chair = new Chair();
+        chairCounter++;
         Chair chair2 = new Chair();
+        chairCounter++;
         chair2.set_reserved(true);
-        cR.save(chair);
-        cR.save(chair2);
+        chairInt1 = cR.save(chair).getChair_id();
+        chairInt2 = cR.save(chair2).getChair_id();
     }
 
 
     @Test
     void testForChairs(){
         List<Chair> chairs = cR.findAll();
-        assertEquals(1, chairs.get(0).getChair_id());
-        assertEquals(2, chairs.get(1).getChair_id());
-        assertEquals(2, chairs.size());
+        assertEquals(chairInt1, chairs.get(0).getChair_id());
+        assertEquals(chairInt2, chairs.get(1).getChair_id());
+        assertEquals(chairCounter, chairs.size());
         assertTrue(chairs.get(1).is_reserved());
     }
 
