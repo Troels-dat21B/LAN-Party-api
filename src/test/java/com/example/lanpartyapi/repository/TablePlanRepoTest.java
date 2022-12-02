@@ -1,4 +1,4 @@
-package com.example.lanpartyapi;
+package com.example.lanpartyapi.repository;
 import com.example.lanpartyapi.entity.Segment;
 import com.example.lanpartyapi.entity.TablePlan;
 import com.example.lanpartyapi.repository.SegmentRepo;

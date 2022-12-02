@@ -12,6 +12,7 @@ import java.util.HashMap;
 @RequestMapping("/api/user")
 public class LanUserController {
 
+
     private final LanUserService lanUserService;
 
     public LanUserController(LanUserService lanUserService) {

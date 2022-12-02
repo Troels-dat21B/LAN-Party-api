@@ -1,4 +1,4 @@
-package com.example.lanpartyapi;
+package com.example.lanpartyapi.repository;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import com.example.lanpartyapi.entity.Desk;
