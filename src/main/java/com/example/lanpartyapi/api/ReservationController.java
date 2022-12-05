@@ -31,9 +31,8 @@ public class ReservationController {
 
     //Uses old method for authentication
     @GetMapping
-    public List<Reservation> getUserReservation(@RequestBody HashMap<String, String> body) {
-        var accessToken = body.get("accessToken");
-        var payload = this.authService.authorize("Bearer " + accessToken);
+    public List<Reservation> getUserReservation(@RequestHeader("Authorization") String bearerToken) {
+        var payload = this.authService.authorize(bearerToken);
 
         return this.reservationService.findByLanUserName(payload.getUsername());
     }

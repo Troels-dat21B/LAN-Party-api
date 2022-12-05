@@ -16,9 +16,6 @@ public class Reservation {
     @JoinColumn(name = "lan_user_id")
     @ManyToOne(fetch = FetchType.LAZY)
     private LanUser lanUser;
-    @JoinColumn(name = "chair_id")
-    @OneToOne
-    private Chair chair;
 
     public String getOwnerUsername() {
         String username = "";

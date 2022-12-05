@@ -49,7 +49,6 @@ public class ReservationService {
 
         var reservation = new Reservation();
         reservation.setLanUser(lanUser);
-        reservation.setChair(chair);
 
         this.reservationRepository.save(reservation);
     }
