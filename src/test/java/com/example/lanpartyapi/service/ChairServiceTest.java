@@ -1,3 +1,4 @@
+/*
 package com.example.lanpartyapi.service;
 
 import com.example.lanpartyapi.dto.ChairResponse;
@@ -58,4 +59,4 @@ class ChairServiceTest {
         assertNotEquals(0, unreservedChairsBySegment.size());
         unreservedChairsBySegment.forEach(chairResponse -> assertFalse(chairResponse.is_reserved()));
     }
-}
+}*/

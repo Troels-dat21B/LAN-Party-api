@@ -29,7 +29,6 @@ public class ChairRepoTest {
         chairCounter++;
         Chair chair2 = new Chair();
         chairCounter++;
-        chair2.set_reserved(true);
         chairInt1 = cR.save(chair).getChair_id();
         chairInt2 = cR.save(chair2).getChair_id();
     }
@@ -40,6 +39,5 @@ public class ChairRepoTest {
         assertEquals(chairInt1, chairs.get(0).getChair_id());
         assertEquals(chairInt2, chairs.get(1).getChair_id());
         assertEquals(chairCounter, chairs.size());
-        assertTrue(chairs.get(1).is_reserved());
     }
 }
