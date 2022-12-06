@@ -29,7 +29,7 @@ public class ChairController {
     }
 
     @GetMapping("/")
-    public Iterable<ChairResponse> getTablePlan() {
+    public Iterable<ChairResponse> getChairs() {
         return this.chairService.findAllChairs();
     }
 
