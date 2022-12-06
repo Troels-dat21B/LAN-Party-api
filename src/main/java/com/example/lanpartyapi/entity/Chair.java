@@ -28,7 +28,11 @@ public class Chair {
     @JoinColumn(name = "desk_id")
     private Desk desk;
 
-    private boolean is_reserved = false;
+    //OBS! If reservations_id is null it means a chair is not reserved.
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "reservation_id")
+    private Reservation reservation;
+
 
     public void addDesk(Desk desk){
         this.desk = desk;

@@ -41,15 +41,15 @@ public class ReservationService {
         var lanUser = lanUserOptional.orElseThrow(() -> new ResponseStatusException(HttpStatus.BAD_REQUEST));
         var chair = chairOptional.orElseThrow(() -> new ResponseStatusException(HttpStatus.BAD_REQUEST));
 
-        if (chair.is_reserved()) {
+        if (chair.getReservation() != null) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST);
         }
 
-        chair.set_reserved(true);
 
         var reservation = new Reservation();
         reservation.setLanUser(lanUser);
 
         this.reservationRepository.save(reservation);
+        //Get reservation_id and save it unto chair with update
     }
 }

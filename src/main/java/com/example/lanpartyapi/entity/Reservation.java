@@ -12,7 +12,8 @@ import javax.persistence.*;
 @Entity
 public class Reservation {
 
-    
+    //OBS! If reservations_id is 0 it means a chair is not reserved.
+    // We assume there isn´t an actual reservation_id with the number 0.
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
