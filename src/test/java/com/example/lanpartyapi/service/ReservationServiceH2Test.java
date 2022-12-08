@@ -144,7 +144,7 @@ public class ReservationServiceH2Test {
         List<Chair> chairs = chairRepo.findAll();
         List<Integer> chairIds = chairs.stream().map(chair -> chair.getChair_id()).toList();
         System.out.println("Fandt: " + chairIds);
-        this.reservationService.create("test_1", chairIds);
+        //this.reservationService.create("test_1", chairIds);
 
         List<Chair> foundChairs = chairRepo.findAll();
 
