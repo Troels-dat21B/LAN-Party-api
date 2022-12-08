@@ -140,11 +140,11 @@ public class ReservationServiceH2Test {
     }
 
     @Test
-    public void fuckThisTestImOut(){
+    public void saveMoreThanOneReservationTest(){
         List<Chair> chairs = chairRepo.findAll();
-        List<Integer> bingchilling = chairs.stream().map(chair -> chair.getChair_id()).toList();
-        System.out.println("Fandt: " + bingchilling);
-        this.reservationService.create("test_1", bingchilling);
+        List<Integer> chairIds = chairs.stream().map(chair -> chair.getChair_id()).toList();
+        System.out.println("Fandt: " + chairIds);
+        this.reservationService.create("test_1", chairIds);
 
         List<Chair> foundChairs = chairRepo.findAll();
 

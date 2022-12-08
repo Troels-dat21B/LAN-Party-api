@@ -31,20 +31,21 @@ public class ReservationController {
 
     //Uses old method for authentication
     @GetMapping
-    public List<Reservation> getUserReservation(@RequestHeader("Authorization") String bearerToken) {
-        var payload = this.authService.authorize(bearerToken);
+    public List<Reservation> getUserReservation(@RequestHeader("Authorization") String bearerToken
+    ) {
+       var payload = this.authService.authorize(bearerToken);
 
         return this.reservationService.findByLanUserName(payload.getUsername());
     }
 
     @PostMapping
     public ResponseEntity<HashMap<String, String>> create(
-           // @RequestHeader("Authorization") String auth,
+           @RequestHeader("Authorization") String auth,
             @RequestBody List<Integer> chairIds
     ) {
-       // var payload = this.authService.authorize(auth);
+       var payload = this.authService.authorize(auth);
 
-       // this.reservationService.create("test", reservationRequest.getChairIds());
+       this.reservationService.create(payload.getUsername(), chairIds);
 
         System.out.println(chairIds);
 

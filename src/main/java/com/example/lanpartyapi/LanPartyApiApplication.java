@@ -9,5 +9,5 @@ public class LanPartyApiApplication {
     public static void main(String[] args) {
         SpringApplication.run(LanPartyApiApplication.class, args);
     }
-
+    
 }
