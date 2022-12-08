@@ -46,11 +46,6 @@ public class ReservationController {
        var payload = this.authService.authorize(auth);
 
        this.reservationService.create(payload.getUsername(), reservationRequest);
-        System.out.println(reservationRequest);
-        System.out.println(reservationRequest.getChairData());
-        System.out.println(reservationRequest.getChairData2());
-        System.out.println(reservationRequest.getChairData3());
-        System.out.println(reservationRequest.getChairData4());
 
 
 

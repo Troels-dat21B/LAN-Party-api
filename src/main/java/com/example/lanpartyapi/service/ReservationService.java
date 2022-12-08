@@ -55,12 +55,6 @@ public class ReservationService {
                 throw new ResponseStatusException(HttpStatus.BAD_REQUEST);
             }
         }
-
-        System.out.printf("----------------------User og Chairs-----------------------------");
-        System.out.printf(lanUser.getLanUserName());
-        System.out.printf(chairList.toString());
-        System.out.printf("-----------------------------------------------------------");
-
         var reservation = new Reservation();
         reservation.setLanUser(lanUser);
         Reservation reservation1 = this.reservationRepository.save(reservation);
@@ -72,23 +66,4 @@ public class ReservationService {
 
     }
 
-/*    public void createMany(String lanUserName, int chairId) {
-        var lanUserOptional = this.lanUserRepository.findById(lanUserName);
-        var chairOptional = this.chairRepo.findById(chairId);
-
-        var lanUser = lanUserOptional.orElseThrow(() -> new ResponseStatusException(HttpStatus.BAD_REQUEST));
-        var chair = chairOptional.orElseThrow(() -> new ResponseStatusException(HttpStatus.BAD_REQUEST));
-
-*//*        if (chair.is_reserved()) {
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST);
-        }
-
-        chair.set_reserved(true);*//*
-
-        var reservation = new Reservation();
-        reservation.setLanUser(lanUser);
-
-        this.reservationRepository.save(reservation);
-        //Get reservation_id and save it unto chair with update
-    }*/
 }
