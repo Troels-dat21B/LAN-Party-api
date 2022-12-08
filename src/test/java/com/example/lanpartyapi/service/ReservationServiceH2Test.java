@@ -159,5 +159,6 @@ public class ReservationServiceH2Test {
         assertEquals(foundId, foundChairs.get(0).getReservation().getId());
         assertNull(foundChairs.get(3).getReservation());
 
+
     }
 }
