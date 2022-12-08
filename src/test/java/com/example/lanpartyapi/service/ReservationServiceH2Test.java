@@ -2,6 +2,7 @@ package com.example.lanpartyapi.service;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+import com.example.lanpartyapi.dto.ReservationRequest;
 import com.example.lanpartyapi.entity.*;
 import com.example.lanpartyapi.repository.*;
 import org.junit.jupiter.api.BeforeAll;
@@ -15,7 +16,7 @@ import java.util.List;
 @DataJpaTest
 public class ReservationServiceH2Test {
 
-
+    private int foundId;
     private static ChairRepo chairRepo;
     private static DeskRepo deskRepo;
     private static SegmentRepo segmentRepo;
@@ -141,17 +142,22 @@ public class ReservationServiceH2Test {
 
     @Test
     public void saveMoreThanOneReservationTest(){
-        List<Chair> chairs = chairRepo.findAll();
-        List<Integer> chairIds = chairs.stream().map(chair -> chair.getChair_id()).toList();
-        System.out.println("Fandt: " + chairIds);
-        //this.reservationService.create("test_1", chairIds);
+        ReservationRequest reservationRequest = new ReservationRequest();
+        reservationRequest.setChairData(1);
+        reservationRequest.setChairData2(2);
+        reservationRequest.setChairData3(3);
+        reservationRequest.setChairData4(0);
+
+        this.reservationService.create("test_1", reservationRequest);
+        foundId++;
 
         List<Chair> foundChairs = chairRepo.findAll();
 
 
 
         assertNotNull(foundChairs.get(0).getReservation());//<---- Assert :-)
-        assertEquals(1, foundChairs.get(0).getReservation().getId());
+        assertEquals(foundId, foundChairs.get(0).getReservation().getId());
+        assertNull(foundChairs.get(3).getReservation());
 
     }
 }
