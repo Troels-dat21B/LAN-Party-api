@@ -1,5 +1,6 @@
 package com.example.lanpartyapi.service;
 
+import com.example.lanpartyapi.dto.ReservationRequest;
 import com.example.lanpartyapi.entity.Chair;
 import com.example.lanpartyapi.entity.LanUser;
 import com.example.lanpartyapi.entity.Reservation;
@@ -37,11 +38,13 @@ public class ReservationService {
         return this.reservationRepository.findByLanUser_LanUserName(username);
     }
 
-    public void create(String lanUserName, List<Integer> chairIds) {
+    public void create(String lanUserName, ReservationRequest reservationRequest) {
+        List<Integer> chairIds = reservationRequest.getIds();
         List<Chair> chairList;
         var lanUserOptional = this.lanUserRepository.findById(lanUserName);
+
         try {
-            chairList = this.chairRepo.findAllById(chairIds);
+            chairList = this.chairRepo.findAllById(chairIds); //
 
         } catch (Exception e) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST);

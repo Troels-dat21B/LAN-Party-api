@@ -15,7 +15,7 @@ import java.util.List;
 @DataJpaTest
 public class ReservationServiceH2Test {
 
-    private int foundId;
+
     private static ChairRepo chairRepo;
     private static DeskRepo deskRepo;
     private static SegmentRepo segmentRepo;
@@ -143,14 +143,15 @@ public class ReservationServiceH2Test {
     public void saveMoreThanOneReservationTest(){
         List<Chair> chairs = chairRepo.findAll();
         List<Integer> chairIds = chairs.stream().map(chair -> chair.getChair_id()).toList();
-        this.reservationService.create("test_1", chairIds);
+        System.out.println("Fandt: " + chairIds);
+        //this.reservationService.create("test_1", chairIds);
 
         List<Chair> foundChairs = chairRepo.findAll();
 
 
 
         assertNotNull(foundChairs.get(0).getReservation());//<---- Assert :-)
-        assertEquals(foundId, foundChairs.get(0).getReservation().getId());
+        assertEquals(1, foundChairs.get(0).getReservation().getId());
 
     }
 }

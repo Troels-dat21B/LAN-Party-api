@@ -34,11 +34,13 @@ public class DeskRepoTest {
 
     }
 
+
     @Test
     void findDesks(){
         List<Desk> desks = tR.findAll();
 
         desks.forEach(desk -> System.out.println(desk.getDesk_id()));
+
 
         assertEquals(deskId1, desks.get(0).getDesk_id());
         assertEquals(deskId2, desks.get(1).getDesk_id());

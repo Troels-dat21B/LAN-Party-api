@@ -41,13 +41,18 @@ public class ReservationController {
     @PostMapping
     public ResponseEntity<HashMap<String, String>> create(
            @RequestHeader("Authorization") String auth,
-            @RequestBody List<Integer> chairIds
+            @RequestBody ReservationRequest reservationRequest
     ) {
        var payload = this.authService.authorize(auth);
 
-       this.reservationService.create(payload.getUsername(), chairIds);
+       this.reservationService.create(payload.getUsername(), reservationRequest);
+        System.out.println(reservationRequest);
+        System.out.println(reservationRequest.getChairData());
+        System.out.println(reservationRequest.getChairData2());
+        System.out.println(reservationRequest.getChairData3());
+        System.out.println(reservationRequest.getChairData4());
 
-        System.out.println(chairIds);
+
 
         return new ResponseEntity<>(
                 new HashMap<>(Map.of("message", "Successfully created new reservation")),
