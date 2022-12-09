@@ -17,6 +17,7 @@ import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import java.util.List;
 import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -47,7 +48,10 @@ class ReservationServiceTest {
         Mockito.when(this.lanUserRepository.findById(Mockito.anyString()))
                 .thenReturn(Optional.of(new LanUser()));
 
-        this.reservationService.create("test", new ReservationRequest());
+        var reservation = new ReservationRequest();
+        reservation.setChairData(1);
+
+        this.reservationService.create("test", reservation);
 
         Mockito.verify(this.reservationRepository,
                 Mockito.times(1)).save(Mockito.any(Reservation.class));
@@ -57,11 +61,17 @@ class ReservationServiceTest {
 
     @Test
     void createMany() {
+        Chair chair = new Chair();
+        chair.setChair_id(1);
+
         Mockito.when(this.lanUserRepository.findById(Mockito.anyString()))
                 .thenReturn(Optional.of(new LanUser()));
 
+        Mockito.when(this.chairRepo.findAllById(Mockito.anyIterable()))
+                .thenReturn(List.of(new Chair[]{chair}));
+
         ReservationRequest reservationRequest = new ReservationRequest();
-        reservationRequest.setChairData(0);
+        reservationRequest.setChairData(1);
         reservationRequest.setChairData2(0);
         reservationRequest.setChairData3(0);
         reservationRequest.setChairData4(0);
@@ -70,6 +80,9 @@ class ReservationServiceTest {
 
         Mockito.verify(this.reservationRepository,
                 Mockito.times(1)).save(Mockito.any(Reservation.class));
+
+        int size = reservationRequest.getIds().size();
+        Mockito.verify(this.chairRepo, Mockito.times(size)).save(Mockito.any(Chair.class));
 
     }
 }
