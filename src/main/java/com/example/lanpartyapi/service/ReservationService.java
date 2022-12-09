@@ -1,5 +1,6 @@
 package com.example.lanpartyapi.service;
 
+import com.example.lanpartyapi.dto.ReservationRequest;
 import com.example.lanpartyapi.entity.Chair;
 import com.example.lanpartyapi.entity.LanUser;
 import com.example.lanpartyapi.entity.Reservation;
@@ -11,7 +12,9 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class ReservationService {
@@ -19,6 +22,7 @@ public class ReservationService {
     private final ReservationRepository reservationRepository;
     private final LanUserRepository lanUserRepository;
     private final ChairRepo chairRepo;
+
 
     public ReservationService(
             ReservationRepository reservationRepository,
@@ -34,22 +38,35 @@ public class ReservationService {
         return this.reservationRepository.findByLanUser_LanUserName(username);
     }
 
-    public void create(String lanUserName, int chairId) {
-        var lanUserOptional = this.lanUserRepository.findById(lanUserName);
-        var chairOptional = this.chairRepo.findById(chairId);
+    public void create(String lanUserName, ReservationRequest reservationRequest) {
+        List<Integer> chairIds;
+        try {
+            chairIds = reservationRequest.getIds();
 
-        var lanUser = lanUserOptional.orElseThrow(() -> new ResponseStatusException(HttpStatus.BAD_REQUEST));
-        var chair = chairOptional.orElseThrow(() -> new ResponseStatusException(HttpStatus.BAD_REQUEST));
-
-        if (chair.is_reserved()) {
+        } catch (NullPointerException e) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST);
         }
 
-        chair.set_reserved(true);
+        List<Chair> chairList;
+        var lanUserOptional = this.lanUserRepository.findById(lanUserName);
 
+
+        chairList = this.chairRepo.findAllById(chairIds); //
+        var lanUser = lanUserOptional.orElseThrow(() -> new ResponseStatusException(HttpStatus.BAD_REQUEST));
+        for (Chair chair : chairList) {
+            if (chair.getReservation() != null) {
+                throw new ResponseStatusException(HttpStatus.BAD_REQUEST);
+            }
+        }
         var reservation = new Reservation();
         reservation.setLanUser(lanUser);
+        Reservation reservation1 = this.reservationRepository.save(reservation);
 
-        this.reservationRepository.save(reservation);
+        for (Chair chair: chairList){
+            chair.setReservation(reservation1);
+            this.chairRepo.save(chair);
+        }
+
     }
+
 }

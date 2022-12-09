@@ -5,6 +5,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.Optional;
+
 @Getter
 @Setter
 @NoArgsConstructor
@@ -12,12 +14,18 @@ public class ChairResponse {
 
     int chair_id;
     int desk_id;
-    boolean is_reserved;
 
-   public ChairResponse(Chair c){
+    Integer reservation_id;
+
+    public ChairResponse(Chair c) {
         this.chair_id = c.getChair_id();
         this.desk_id = c.getDesk().getDesk_id();
-        this.is_reserved = c.is_reserved();
+        //Checks if a reservation is present in Chair c. If it isn´t present it sets reservation_id to null;
+        if (c.getReservation() == null) {
+            this.reservation_id = null;
+        } else {
+            this.reservation_id = c.getReservation().getId();
+        }
     }
 
 }

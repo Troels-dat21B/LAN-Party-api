@@ -54,7 +54,7 @@ public class ChairService {
     public List<ChairResponse> findUnreservedBySegment(int segmentId) {
         var chairs = this.findBySegment(segmentId);
 
-        return chairs.stream().filter(chairResponse -> !chairResponse.is_reserved()).toList();
+        return chairs.stream().filter(chairResponse -> chairResponse.getReservation_id() == null).toList();
     }
 
     public void deleteChair(int id) {
@@ -84,6 +84,7 @@ public class ChairService {
     }
 
 
+    //SKal nok laves om.
     public void updateChair(ChairRequest body, int id) {
 
         Chair chair = chairRepo.findById(id).orElseThrow(() -> new ResponseStatusException(HttpStatus.BAD_REQUEST, "Chair not found"));
@@ -91,13 +92,10 @@ public class ChairService {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Cannot change this chair");
         }
         chair.setChair_id(body.getId());
-        updateChairState(chair);
+        //updateChairState(chair);
         //chair.setDesk(body.getDesk());
 
         chairRepo.save(chair);
     }
 
-    private void updateChairState(Chair chair) {
-        chair.set_reserved(!chair.is_reserved());
-    }
 }
