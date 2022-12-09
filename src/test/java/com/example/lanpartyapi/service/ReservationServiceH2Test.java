@@ -28,7 +28,14 @@ public class ReservationServiceH2Test {
 
     private ReservationService reservationService;
 
-
+    private static Chair chairStatic;
+    private static Chair chairStatic2;
+    private static Chair chairStatic3;
+    private static Chair chairStatic4;
+    private static Chair chairStatic5;
+    private static Chair chairStatic6;
+    private static Chair chairStatic7;
+    private static Chair chairStatic8;
 
 
     @BeforeAll
@@ -41,17 +48,11 @@ public class ReservationServiceH2Test {
             @Autowired ReservationRepository reservationRepository
     ) {
         chairRepo = chairRepository;
-        chairRepo.deleteAll();
         deskRepo = deskRepository;
-        deskRepo.deleteAll();
         segmentRepo = segmentRepository;
-        segmentRepo.deleteAll();
         tablePlanRepo = tablePlanRepository;
-        tablePlanRepo.deleteAll();
         lanUserRepo = lanUserRepository;
-        lanUserRepo.deleteAll();
         reservationRepo = reservationRepository;
-        reservationRepo.deleteAll();
 
         LanUser user1 = new LanUser();
         user1.setUserType(LanUserType.USER);
@@ -124,14 +125,14 @@ public class ReservationServiceH2Test {
         deskRepo.save(desk3);
         deskRepo.save(desk4);
 
-        chairRepo.save(chair);
-        chairRepo.save(chair2);
-        chairRepo.save(chair3);
-        chairRepo.save(chair4);
-        chairRepo.save(chair5);
-        chairRepo.save(chair6);
-        chairRepo.save(chair7);
-        chairRepo.save(chair8);
+        chairStatic = chairRepo.save(chair);
+        chairStatic2 = chairRepo.save(chair2);
+        chairStatic3 = chairRepo.save(chair3);
+        chairStatic4 = chairRepo.save(chair4);
+        chairStatic5 = chairRepo.save(chair5);
+        chairStatic6 = chairRepo.save(chair6);
+        chairStatic7 = chairRepo.save(chair7);
+        chairStatic8 = chairRepo.save(chair8);
     }
 
     @BeforeEach
@@ -143,19 +144,17 @@ public class ReservationServiceH2Test {
     @Test
     public void saveMoreThanOneReservationTest(){
         ReservationRequest reservationRequest = new ReservationRequest();
-        reservationRequest.setChairData(1);
-        reservationRequest.setChairData2(2);
-        reservationRequest.setChairData3(3);
+        reservationRequest.setChairData(chairStatic.getChair_id());
+        reservationRequest.setChairData2(chairStatic2.getChair_id());
+        reservationRequest.setChairData3(chairStatic3.getChair_id());
         reservationRequest.setChairData4(0);
 
         this.reservationService.create("test_1", reservationRequest);
-        foundId++;
 
         List<Chair> foundChairs = chairRepo.findAll();
 
         assertNotNull(foundChairs.get(0).getReservation());//<---- Assert :-)
         assertNull(foundChairs.get(3).getReservation());
-        assertEquals(foundId, foundChairs.get(0).getReservation().getId());
 
 
     }

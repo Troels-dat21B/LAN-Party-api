@@ -51,7 +51,7 @@ public class ReservationService {
         var lanUserOptional = this.lanUserRepository.findById(lanUserName);
 
 
-        chairList = this.chairRepo.findAllById(chairIds); //
+        chairList = this.chairRepo.findAllById(chairIds);
         var lanUser = lanUserOptional.orElseThrow(() -> new ResponseStatusException(HttpStatus.BAD_REQUEST));
         for (Chair chair : chairList) {
             if (chair.getReservation() != null) {
