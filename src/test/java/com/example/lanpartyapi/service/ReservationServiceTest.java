@@ -1,6 +1,6 @@
-/*
 package com.example.lanpartyapi.service;
 
+import com.example.lanpartyapi.dto.ReservationRequest;
 import com.example.lanpartyapi.entity.Chair;
 import com.example.lanpartyapi.entity.LanUser;
 import com.example.lanpartyapi.entity.LanUserType;
@@ -47,12 +47,29 @@ class ReservationServiceTest {
         Mockito.when(this.lanUserRepository.findById(Mockito.anyString()))
                 .thenReturn(Optional.of(new LanUser()));
 
-        Mockito.when(this.chairRepo.findById(Mockito.anyInt()))
-                        .thenReturn(Optional.of(new Chair()));
-
-        this.reservationService.create("test", 1);
+        this.reservationService.create("test", new ReservationRequest());
 
         Mockito.verify(this.reservationRepository,
                 Mockito.times(1)).save(Mockito.any(Reservation.class));
+
+
     }
-}*/
+
+    @Test
+    void createMany() {
+        Mockito.when(this.lanUserRepository.findById(Mockito.anyString()))
+                .thenReturn(Optional.of(new LanUser()));
+
+        ReservationRequest reservationRequest = new ReservationRequest();
+        reservationRequest.setChairData(0);
+        reservationRequest.setChairData2(0);
+        reservationRequest.setChairData3(0);
+        reservationRequest.setChairData4(0);
+
+        this.reservationService.create("test", reservationRequest);
+
+        Mockito.verify(this.reservationRepository,
+                Mockito.times(1)).save(Mockito.any(Reservation.class));
+
+    }
+}

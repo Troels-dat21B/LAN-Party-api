@@ -57,16 +57,4 @@ public class SegmentRepoTest {
 
         assertEquals(3, myTablePlan.getSegments().size());
     }
-
-    @Test
-    void removeSegmentsFromTablePlan() { //TODO Tænker denne test skal køres igennem Service klassen
-
-        // TablePlan myTablePlan = tablePlanRepo.findByName("Bord1");
-
-        //myTablePlan.
-
-
-    }
-
-
 }

@@ -153,11 +153,9 @@ public class ReservationServiceH2Test {
 
         List<Chair> foundChairs = chairRepo.findAll();
 
-
-
         assertNotNull(foundChairs.get(0).getReservation());//<---- Assert :-)
-        assertEquals(foundId, foundChairs.get(0).getReservation().getId());
         assertNull(foundChairs.get(3).getReservation());
+        assertEquals(foundId, foundChairs.get(0).getReservation().getId());
 
 
     }

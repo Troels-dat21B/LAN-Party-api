@@ -16,8 +16,6 @@ public class ReservationRequest {
     int chairData3;
     int chairData4;
 
-
-
     public List<Integer> getIds(){
         List<Integer> chairIds = new ArrayList<>();
         if (chairData != 0){
@@ -31,6 +29,9 @@ public class ReservationRequest {
         }
         if (chairData4 != 0){
             chairIds.add(this.chairData4);
+        }
+        if(chairIds.size() == 0){
+            throw new NullPointerException();
         }
         return chairIds;
     }

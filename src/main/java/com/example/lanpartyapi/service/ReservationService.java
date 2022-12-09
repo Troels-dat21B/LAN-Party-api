@@ -39,16 +39,19 @@ public class ReservationService {
     }
 
     public void create(String lanUserName, ReservationRequest reservationRequest) {
-        List<Integer> chairIds = reservationRequest.getIds();
+        List<Integer> chairIds;
+        try {
+            chairIds = reservationRequest.getIds();
+
+        } catch (NullPointerException e) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST);
+        }
+
         List<Chair> chairList;
         var lanUserOptional = this.lanUserRepository.findById(lanUserName);
 
-        try {
-            chairList = this.chairRepo.findAllById(chairIds); //
 
-        } catch (Exception e) {
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST);
-        }
+        chairList = this.chairRepo.findAllById(chairIds); //
         var lanUser = lanUserOptional.orElseThrow(() -> new ResponseStatusException(HttpStatus.BAD_REQUEST));
         for (Chair chair : chairList) {
             if (chair.getReservation() != null) {

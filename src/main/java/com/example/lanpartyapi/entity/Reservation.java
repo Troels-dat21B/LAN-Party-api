@@ -21,7 +21,7 @@ public class Reservation {
     @ManyToOne(fetch = FetchType.LAZY)
     private LanUser lanUser;
 
-    public String getOwnerUsername() {
+     public String getOwnerUsername() {
         String username = "";
         if (this.lanUser != null) {
             username = this.lanUser.getLanUserName();
