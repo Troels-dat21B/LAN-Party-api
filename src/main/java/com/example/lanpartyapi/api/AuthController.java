@@ -2,6 +2,7 @@ package com.example.lanpartyapi.api;
 
 import com.example.lanpartyapi.dto.LanUserRequest;
 import com.example.lanpartyapi.service.AuthService;
+import io.netty.handler.codec.http.HttpResponseStatus;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -24,9 +25,15 @@ public class AuthController {
     
     @PostMapping("/signIn")
     public ResponseEntity<HashMap<String, String>> signIn(@RequestBody LanUserRequest lanUserRequest){
-        var token = this.authService.signIn(lanUserRequest);
+       try{
+           var token = this.authService.signIn(lanUserRequest);
 
-        return new ResponseEntity<>(new HashMap<>(Map.of("accessToken", token)), HttpStatus.OK);
+           return new ResponseEntity<>(new HashMap<>(Map.of("accessToken", token)), HttpStatus.OK);
+
+       }catch (Exception e){
+           throw new ResponseStatusException(HttpStatus.BAD_REQUEST, e.getMessage());
+       }
+
     }
 
     @PostMapping("/authorize")
