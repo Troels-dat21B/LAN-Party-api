@@ -8,10 +8,6 @@ on:
     branches:
       - main
   workflow_dispatch:
-  
-env:
-  JWT_SECRET: test
-  JWT_ISSUER: test
 
 jobs:
   build:
@@ -53,5 +49,5 @@ jobs:
         with:
           app-name: 'LAN-Party'
           slot-name: 'Production'
-          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_828FC6357EC54944BC84272F3A4ADCCF }}
+          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_62BA4029BD6A4546880BBB9E1DFEE46C }}
           package: '*.jar'
